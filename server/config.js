@@ -1,8 +1,21 @@
 require('dotenv').config();
 
-const DEV = process.env.NODE_ENV === 'development'; // 是否为开发环境
-const PRO = process.env.NODE_ENV === 'production'; // 是否为生成环境
-const PORT = PRO ? process.env.FRONT_PORT : process.env.END_PORT;
+// 是否为开发环境
+const DEV = process.env.NODE_ENV === 'development';
+
+// 是否为生成环境
+const PRO = process.env.NODE_ENV === 'production';
+
+// TODO: 端口由集成工具传参
+const PORT = DEV ? 3000 : 3001;
+
+// 数据库信息
+const DB_DOMAIN = process.env.DB_DOMAIN;
+const DB_PORT = process.env.DB_PORT;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_NAME = process.env.DB_NAME;
+const DB_COLLECTION = process.env.DB_COLLECTION;
 
 const CORS_ERR = 'Not allowed by CORS';
 
@@ -11,4 +24,10 @@ module.exports = {
   PRO,
   CORS_ERR,
   PORT,
+  DB_DOMAIN,
+  DB_PORT,
+  DB_USER,
+  DB_PASSWORD,
+  DB_NAME,
+  DB_COLLECTION,
 };

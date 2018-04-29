@@ -1,12 +1,10 @@
-import {
-  DEV,
-} from '@/config';
 import axios from 'axios';
+import * as env from '@/env';
 import * as globalMessage from './feedback';
 import * as globalLoading from './loading';
 
 const defaultConfig = {
-  baseURL: DEV ? 'http://localhost:3001' : '',
+  baseURL: env.API_HOST,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

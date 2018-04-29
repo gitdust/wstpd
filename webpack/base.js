@@ -20,7 +20,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: ['babel-loader?compact=false'],
-        //loader with config - use: [{ loader: 'bable-loader' }]
+        //loader with query - use: [{ loader: 'bable-loader', query: { compact: false } }]
       },
     ]
   }, 
@@ -28,6 +28,9 @@ module.exports = {
   mode: 'development',
   // 插件
   plugins: [
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
+    // }),
     new HtmlWebpackPlugin({
       template: utils.resolve('public', 'index.html'),
       // 会在打包好的bundle.js后面加上hash串

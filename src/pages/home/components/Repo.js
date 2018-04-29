@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Card, Icon } from 'antd';
 
 const Title = (props) => [
+  <a key="repo-name" className="repo-name" href={props.githubPage}>{props.repoName}</a>,
   <Icon key="homepage" className="repo-homepage" type="chrome" />,
-  <Icon key="github-homepage" className="repo-homepage" type="github" />,
-  <span key="repo-name" className="repo-name">{props.repoName}</span>
 ];
 const Extra = () => (
   <div>

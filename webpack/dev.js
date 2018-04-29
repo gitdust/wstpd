@@ -9,8 +9,8 @@ module.exports = WebpackMerge(base, {
   devtool: 'cheap-module-source-map',
   // 开发服务器配置
   devServer: {
-    host: process.env.FRONT_HOST,
-    port: process.env.FRONT_PORT,
+    host: 'localhost',
+    port: 3000,
     contentBase: path.resolve('src'),
     publicPath: '/',
     hot: true,
