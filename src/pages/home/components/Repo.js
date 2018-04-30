@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 
-const Title = (props) => [
-  <a key="repo-name" className="repo-name" href={props.githubPage}>{props.repoName}</a>,
-  <Icon key="homepage" className="repo-homepage" type="chrome" />,
+import BaseLink from '@/components/BaseLink';
+
+const Title = ({ repo }) => [
+  <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>,
 ];
-const Extra = () => (
-  <div>
-    <Icon type="star" /> 555364
-  </div>
-)
+const Extra = ({ repo }) => [
+  <BaseLink key="github-page" url={repo.githubPage}>
+    <Icon type="github" />
+  </BaseLink>,
+];
 
 class Repo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true
-    }
+  static defaultProps = {
+    repo: null,
+  }
+  static propTypes = {
+    repo: PropTypes.object,
   }
   render() {
+    const { repo } = this.props;
     return (
       <Card
-        loading={this.state.loading}
-        title={<Title repoName="react" />}
-        extra={<Extra />}
+        title={<Title repo={repo} />}
+        extra={<Extra repo={repo} />}
       >
-        Whatever content
+        { repo.describe }
       </Card>
     );
   }

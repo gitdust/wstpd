@@ -28,6 +28,7 @@
     "babel-plugin-import": "^1.7.0",
     "babel-preset-airbnb": "^2.4.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",

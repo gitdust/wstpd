@@ -12,6 +12,7 @@
   "rules": {
     "no-undef": "warn",
     "no-unused-vars": "warn",
+    "react/forbid-prop-types": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": "off",
     "react/prop-types": "warn",

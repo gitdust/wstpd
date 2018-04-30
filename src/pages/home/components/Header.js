@@ -7,7 +7,7 @@ class Header extends Component {
       <header>
         <h1>WSTPD</h1>
         <span>
-          <Icon type="github" style={{ fontSize: 20 }} />
+          <Icon type="github" />
         </span>
       </header>
     );

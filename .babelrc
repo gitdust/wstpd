@@ -6,6 +6,7 @@
       }
     }],
     "react",
-    "airbnb"
+    "airbnb",
+    "stage-0"
   ]
 }
