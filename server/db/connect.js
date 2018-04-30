@@ -1,14 +1,14 @@
-const env = require('../config');
+const config = require('../config');
 const log = require('debug')('node:mongodb');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 
 mongoose.Promise = Promise;
 
-if (env.DEV) {
-  mongoose.connect(`mongodb://${env.DB_DOMIAN}:${env.DB_PORT}/${env.DB_NAME}`);
+if (config.DEV) {
+  mongoose.connect(`mongodb://${config.DB_DOMIAN}:${config.DB_PORT}/${config.DB_NAME}`);
 } else {
-  mongoose.connect(`mongodb://${env.DB_USER}:${env.DB_PWD}@${env.DB_DOMIAN}:${env.DB_PORT}/${env.DB_NAME}`);
+  mongoose.connect(`mongodb://${config.DB_USER}:${config.DB_PWD}@${config.DB_DOMIAN}:${config.DB_PORT}/${config.DB_NAME}`);
 }
 const db = mongoose.connection;
 db.on('error', (err) => {

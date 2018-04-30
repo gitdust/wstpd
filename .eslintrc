@@ -10,6 +10,8 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "no-undef": "warn",
+    "no-unused-vars": "warn",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": "off",
     "react/prop-types": "warn",

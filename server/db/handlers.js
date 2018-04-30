@@ -3,7 +3,8 @@ const Repo = require('./models').RepoAbstract;
 // 根据名字查找，返回仓库名字列表
 exports.QueryRepoByName = async (q, res) => {
   try {
-    const result = await Repo.find({ name: q }).select('name').exec();
+    // const result = await Repo.find({ name: q }).select('name').exec();
+    const result = [];
     res.json({ ok: true, data: result });
   } catch (error) {
     console.log('error');

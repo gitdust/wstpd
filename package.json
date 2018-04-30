@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "web": "NODE_ENV=development npx webpack-dev-server --config ./webpack/dev.js",
-    "server": "NODE_ENV=development node ./server/www.js",
+    "server": "npx nodemon ./server/www",
     "build": "NODE_ENV=production npx webpack --config ./webpack/prod.js",
-    "start": "NODE_ENV=production node ./server/www.js",
+    "start": "NODE_ENV=production DEBUG=node:* node ./server/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
+    "nodemon": "^1.17.3",
     "postcss": "^6.0.21",
     "postcss-loader": "^2.1.4",
     "style-loader": "^0.21.0",
