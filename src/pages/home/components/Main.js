@@ -56,7 +56,7 @@ class Main extends Component {
   
   // 选择
   onSelect(value, option) {
-    console.log('on-select', { value, option });
+    // console.log('on-select', { value, option });
     if (!value) {
       return;
     }
@@ -82,7 +82,6 @@ class Main extends Component {
       }
     });
   }
-  // 
   showRepos() {
     const { repos, repo } = this.state;
     if (this.state.repo) {
@@ -101,15 +100,13 @@ class Main extends Component {
             aotuFocus
             backfill
             dataSource={dataSource}
-            placeholder="Search package name..."
+            placeholder="Search package name in your package.json"
             onSelect={this.onSelect}
             onSearch={debounceSearch}
           />
         </section>
         <section className="result">
-          {
-            this.showRepos()
-          }
+          { this.showRepos() }
         </section>
       </main>
     );

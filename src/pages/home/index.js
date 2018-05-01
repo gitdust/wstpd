@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import request from '@/utils/request';
+import { BackTop } from 'antd';
 
 import Header from './components/Header';
 import Main from './components/Main';
@@ -21,6 +21,7 @@ class App extends Component {
       <Header key="header" />,
       <Main key="main" />,
       <Footer key="footer" />,
+      <BackTop key="back-top" visibilityHeight="50" />,
     ];
   }
 }

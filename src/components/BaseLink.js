@@ -5,7 +5,7 @@ const BaseLink = (props) => (
     href={props.url}
     target="_blank"
     rel="noopener noreferrer"
-    className={props.styleName}
+    className="link"
   >
     { props.children }
   </a>
