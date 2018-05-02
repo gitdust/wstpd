@@ -5,11 +5,15 @@ const Promise = require('bluebird');
 
 mongoose.Promise = Promise;
 
+let CONNECT_STRING = 'mongodb://';
 if (config.DEV) {
-  mongoose.connect(`mongodb://${config.DB_DOMIAN}:${config.DB_PORT}/${config.DB_NAME}`);
+  CONNECT_STRING += `${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`;
 } else {
-  mongoose.connect(`mongodb://${config.DB_USER}:${config.DB_PWD}@${config.DB_DOMIAN}:${config.DB_PORT}/${config.DB_NAME}`);
+  CONNECT_STRING += `${config.DB_USER}:${config.DB_PWD}@${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`
 }
+// log(CONNECT_STRING);
+mongoose.connect(CONNECT_STRING);
+
 const db = mongoose.connection;
 db.on('error', (err) => {
   log(`mongodb connect with error:${err.message}.`);

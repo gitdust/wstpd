@@ -63,7 +63,7 @@ class Main extends Component {
     api.QueryRepoDetailByName(value).then((result) => {
       const { ok, data } = result;
       if (ok) {
-        this.setState({ repo: data });
+        this.setState({ repo: data[0] });
       }
     });
   }

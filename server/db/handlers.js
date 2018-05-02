@@ -1,52 +1,56 @@
+const log = require('debug')("node:db.handlers");
 const Repo = require('./models').RepoAbstract;
 
 // 首页随机获取仓库显示
 exports.getRandomRepos = async (res) => {
   try {
-    const result = [];
-    for (let i = 0; i < 7; i += 1) {
-      result.push({
-        id: i,
-        name: `React${i}`,
-        homepage: 'https://reactjs.org/',
-        githubPage: 'https://github.com/facebook/react',
-        describe: 'UI 框架'
-      });
-    }
+    const result = await Repo.find().exec();
     res.json({ ok: true, data: result });
   } catch (error) {
-    console.log('error');
+    log('handler - getRandomRepos error:', error);
+    res.json({ ok: false, message: error.message });
   }
 }
 
 // 根据名字查找，返回仓库名字列表
-exports.QueryRepoByName = async (q, res) => {
+exports.queryRepoByName = async (q, res) => {
   try {
-    // const result = await Repo.find({ name: q }).select('name').exec();
-    const result = [];
-    for (let i = 0; i < 10; i += 1) {
-      result.push(`react-${i}`);
-    }
-    res.json({ ok: true, data: result });
+    const result = await Repo.find({ name: { $regex: q, $options: 'i' } }).select('name').exec();
+    let data = [];
+    result.forEach(r => data.push(r.name));
+    res.json({ ok: true, data });
   } catch (error) {
-    console.log('error');
+    log('handler - queryRepoByName error:', error);
+    res.json({ ok: false, message: error.message });
   }
 }
 
 // 根据仓库名字返回仓库详细信息
-exports.QueryRepoDetailByName = async (q, res) => {
+exports.queryRepoDetailByName = async (q, res) => {
   try {
-    // const result = await Repo.find({ name: q }).exec();
-    res.json({
-      ok: true,
-      data:{
-        name: 'React',
-        homepage: 'https://reactjs.org/',
-        githubPage: 'https://github.com/facebook/react',
-        describe: 'UI 框架'
-      },
-    });
+    const result = await Repo.findOne({ name: q }).exec();
+    res.json({ ok: true, data: result });
   } catch (error) {
-    console.log('error');
+    log('handler - queryRepoDetailByName error:', error);
+    res.json({ ok: false, message: error.message });
+  }
+}
+
+// 新增、更新数据
+exports.updateRepos = async (repo, res) => {
+  try {
+    const { name, ...ret } = repo;
+    const exit = await Repo.find({ name }).exec();
+    if (exit) {
+      // 新增
+      repo = new Repo(repo);
+      repo.save();
+    } else {
+      // 更新
+      Repo.update({ name }, { $set: { ...ret } }).exec();
+    }
+  } catch (error) {
+    log('handler - updateRepos error:', error);
+    res.json({ ok: false, message: error.message });
   }
 }

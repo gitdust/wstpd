@@ -6,14 +6,13 @@ module.exports = {
   // 入口文件
   entry: {
     app: utils.resolve('src', 'main.js'),
-    // TODO: antd 按需
     vendors: [
       'react',
       'react-dom',
       'prop-types',
       'antd/es/auto-complete',
       'antd/es/card',
-      'antd/es/backtop',
+      'antd/es/back-top',
       'antd/es/message',
       'antd/es/icon',
     ],

@@ -29,6 +29,13 @@ function handleResponse(response) {
       message: `error with ${status}`,
     });
   }
+
+  const { ok } = data;
+  if (!ok) {
+    return rejectError({
+      message: `data error with ${status}`,
+    });
+  }
   return data;
 }
 

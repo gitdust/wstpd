@@ -3,6 +3,7 @@ const handlers = require('../db/handlers');
 
 const router = express.Router();
 
+// /api
 router.get('/', (req, res) => {
   handlers.getRandomRepos(res);
 });
@@ -10,13 +11,19 @@ router.get('/', (req, res) => {
 // /api/query
 router.get('/query', (req, res) => {
   const { q } = req.query;
-  handlers.QueryRepoByName(q, res);
+  handlers.queryRepoByName(q, res);
 })
 
-// /api
+// /api/detail
 router.get('/detail', (req, res) => {
   const { q } = req.query;
-  handlers.QueryRepoDetailByName(q, res);
+  handlers.queryRepoDetailByName(q, res);
+});
+
+// /api/update
+router.post('/update', (req, res) => {
+  const { repo } = req.body;
+  handlers.updateRepos(repo, res);
 });
 
 module.exports = router;
