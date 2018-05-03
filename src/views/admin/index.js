@@ -18,6 +18,11 @@ class Admin extends Component {
     }
     this.onUpdate = this.onUpdate.bind(this);
     this.onReset = this.onReset.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
+  onInputChange(e) {
+    this.setState({ token: e.target.value });
   }
   // 更新数据
   onUpdate(e) {
@@ -25,10 +30,13 @@ class Admin extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         api.updateRepo({
           token,
           repo: values,
+        }).then((result) => {
+          if (result) {
+            this.onReset();
+          }
         });
       }
     });
@@ -37,19 +45,25 @@ class Admin extends Component {
   onReset() {
     this.props.form.resetFields();
   }
+  // 选择
+  onSelect(repo) {
+    const fields = {};
+    Object.keys(repo).forEach((key) => {
+      fields[key] = { value: repo[key] }
+    });
+    console.log(fields);
+    this.props.form.setFields(fields);
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     const { token } = this.state;
     return (
       <div style={{ padding: 10 }}>
-        <Input placeholder="TOKEN" value={token} style={{ margin: '10px 0' }} />
-        <BaseSearch
-          onSearch={() => {}}
-          onSelect={() => {}}
-        />
+        <Input placeholder="TOKEN" value={token} onChange={this.onInputChange} style={{ margin: '10px 0' }} />
+        <BaseSearch onSelect={this.onSelect} />
         <Form style={{ marginTop: 5 }}>
           <FormItem>
-            {getFieldDecorator('email')(
+            {getFieldDecorator('name')(
               <Input placeholder="Package name" />
             )}
           </FormItem>

@@ -38,18 +38,18 @@ exports.queryRepoDetailByName = async (q, res) => {
 
 // 新增、更新数据
 exports.updateRepos = async (repo, res) => {
-  console.log({repo});
   try {
     const { name, ...ret } = repo;
-    const exit = await Repo.find({ name }).exec();
+    const exit = await Repo.findOne({ name }).exec();
     if (exit) {
+      // 更新
+      Repo.update({ name }, { $set: { ...ret } }).exec();
+    } else {
       // 新增
       repo = new Repo(repo);
       repo.save();
-    } else {
-      // 更新
-      Repo.update({ name }, { $set: { ...ret } }).exec();
     }
+    res.json({ ok: true });
   } catch (error) {
     log('handler - updateRepos error:', error);
     res.json({ ok: false, message: error.message });

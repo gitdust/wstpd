@@ -5,9 +5,13 @@ import { AutoComplete } from 'antd';
 import * as helper from './helper';
 
 class BaseSearch extends Component {
+  static defaultProps = {
+    onSearch: () => {},
+    onSelect: () => {},
+  }
   static propTypes = {
-    onSearch: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
+    onSearch: PropTypes.func,
+    onSelect: PropTypes.func,
   }
   constructor(props) {
     super(props);

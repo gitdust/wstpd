@@ -30,11 +30,10 @@ function handleResponse(response) {
     });
   }
 
-  const { ok } = data;
+  // success response but ok=false
+  const { ok, message } = data;
   if (!ok) {
-    return rejectError({
-      message: `data error with ${status}`,
-    });
+    return rejectError({ message });
   }
   return data;
 }

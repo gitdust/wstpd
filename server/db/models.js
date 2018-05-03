@@ -7,11 +7,9 @@ const RepoSchema = new Schema({
   // 名字
   name: String,
   // github 地址
-  githubpage: String,
+  githubPage: String,
   // 官网地址
   homepage: String,
-  // 仓库 star 数
-  stars: String,
   // 作用描述
   describe: String,
 }, {
