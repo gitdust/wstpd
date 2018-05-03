@@ -1,9 +1,7 @@
-require('dotenv').config();
-
-const path = require('path');
 const webpack = require('webpack');
 const base = require('./base');
 const WebpackMerge = require('webpack-merge');
+const utils = require('./utils');
 
 module.exports = WebpackMerge(base, {
   devtool: 'cheap-module-source-map',
@@ -11,12 +9,14 @@ module.exports = WebpackMerge(base, {
   devServer: {
     host: 'localhost',
     port: 3000,
-    contentBase: path.resolve('src'),
-    publicPath: '/',
+    contentBase: utils.CONTENTBASE,
+    publicPath: utils.PUBLICPATH,
     hot: true,
     inline: true,
     historyApiFallback: true,
     disableHostCheck: true,
+    // 关闭提示
+    // quiet: true,
   },
   module: {
     rules: [

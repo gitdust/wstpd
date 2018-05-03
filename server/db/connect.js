@@ -9,7 +9,7 @@ let CONNECT_STRING = 'mongodb://';
 if (config.DEV) {
   CONNECT_STRING += `${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`;
 } else {
-  CONNECT_STRING += `${config.DB_USER}:${config.DB_PWD}@${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`
+  CONNECT_STRING += `${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`
 }
 // log(CONNECT_STRING);
 mongoose.connect(CONNECT_STRING);
