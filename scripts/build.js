@@ -22,7 +22,7 @@ rm(utils.resolve("dist/*"), err => {
         return console.error(err);
       }
       console.log(chalk.green("statics copy complete.\n"));
-    }
+    },
   );
   webpack(webpackConfig, (err, stats) => {
     spinner.stop();
@@ -36,8 +36,8 @@ rm(utils.resolve("dist/*"), err => {
         // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
         children: false,
         chunks: false,
-        chunkModules: false
-      }) + "\n\n"
+        chunkModules: false,
+      }) + "\n\n",
     );
 
     if (stats.hasErrors()) {

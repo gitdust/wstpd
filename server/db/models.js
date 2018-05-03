@@ -13,7 +13,7 @@ const RepoSchema = new Schema({
   // 作用描述
   describe: String,
 }, {
-  versionKey: false
+  versionKey: false,
 });
 
 /**

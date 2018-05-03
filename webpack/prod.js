@@ -26,8 +26,11 @@ module.exports = WebpackMerge(base, {
   },
   plugins: [
     utils.UglifyJsPlugin(),
-    new webpack.HashedModuleIdsPlugin(), // 根据模块相对路径生成模块标识，如果模块没有改变，那模块标识也不会改变
-    new WebpackMd5Hash(), // 单独处理 manifest
-    new ExtractTextPlugin('[name].[contenthash:5].css?v=[contenthash:5]'), // conenthash 代表的是文本文件内容的 hash 值
+    // 根据模块相对路径生成模块标识，如果模块没有改变，那模块标识也不会改变
+    new webpack.HashedModuleIdsPlugin(),
+    // 单独处理 manifest
+    new WebpackMd5Hash(),
+    // conenthash 代表的是文本文件内容的 hash 值
+    new ExtractTextPlugin('[name].[contenthash:5].css?v=[contenthash:5]'),
   ]
 })

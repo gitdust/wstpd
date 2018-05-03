@@ -16,7 +16,7 @@ class BaseSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: []
+      dataSource: [],
     };
     this.onSearch = this.onSearch.bind(this);
     this.onSelect = this.onSelect.bind(this);

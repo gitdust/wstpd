@@ -51,7 +51,6 @@ class Admin extends Component {
     Object.keys(repo).forEach((key) => {
       fields[key] = { value: repo[key] }
     });
-    console.log(fields);
     this.props.form.setFields(fields);
   }
   render() {
@@ -64,22 +63,22 @@ class Admin extends Component {
         <Form style={{ marginTop: 5 }}>
           <FormItem>
             {getFieldDecorator('name')(
-              <Input placeholder="Package name" />
+              <Input placeholder="Package name" />,
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('homepage')(
-              <Input placeholder="homepage" />
+              <Input placeholder="homepage" />,
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('githubPage')(
-              <Input placeholder="githubPage" />
+              <Input placeholder="githubPage" />,
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('describe')(
-              <TextArea placeholder="describe" row="4" />
+              <TextArea placeholder="describe" row="4" />,
             )}
           </FormItem>
           <FormItem>

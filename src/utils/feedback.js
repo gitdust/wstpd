@@ -1,7 +1,7 @@
 import { message } from 'antd';
 
 message.config({
-  duration: 1
+  duration: 1,
 });
 
 export const success = (text) => {

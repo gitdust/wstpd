@@ -48,7 +48,7 @@ class Main extends Component {
       </section>,
       <section key="result" className="result">
         { this.showRepos() }
-      </section>
+      </section>,
     ];
   }
 }
