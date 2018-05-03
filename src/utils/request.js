@@ -48,10 +48,33 @@ client.interceptors.response.use(handleResponse, (error) => {
   });
 });
 
+/**
+ * 客户端请求
+ * @param {string} url 接口path
+ * @param {object} config 接口参数
+ * config = {
+ *   // default 'GET'
+ *   method: 'POST',
+ *   // when method is 'GET'
+ *   params: {
+ *     username: 'admin',
+ *   },
+ *   // when method is not 'GET'
+ *   data: {
+ *     name: 'admin',
+ *   },
+ * }
+ */
 const request = (url, config = {}) => {
   globalLoading.start();
   defaultConfig.url = url;
-  const newConfig = Object.assign(config, defaultConfig);
+  let newConfig = Object.assign(config, defaultConfig);
+  
+  // resolve HTTP 'GET' cache
+  if (!newConfig.hasOwnProperty('method')) {
+    newConfig.url += `?r=${Date.now()}`;
+  }
+
   return client.request(newConfig)
     .catch((err) => {
       globalMessage.error(err.message);

@@ -1,4 +1,5 @@
 import * as env from '@/env';
+import * as globalMessage from './feedback';
 
 window.onerror = (message, source, lineno, colno) => {
   const msg = {}; // 收集客户端错误信息
@@ -11,5 +12,7 @@ window.onerror = (message, source, lineno, colno) => {
   if (env.DEV) {
     console.log('client error:', msg);
   }
-  // window.setTimeout(() => { window.location.reload(true); }, 1000);
+  // TODO: 运行时错误友好处理方式以及使用图像Ping进行错误收集
+  globalMessage.error(message);
+  // window.setTimeout(() => { window.location.reload(true); }, 3000);
 };

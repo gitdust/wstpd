@@ -10,16 +10,21 @@ module.exports = {
       'react',
       'react-dom',
       'prop-types',
-      'antd/es/auto-complete',
-      'antd/es/card',
-      'antd/es/back-top',
-      'antd/es/message',
-      'antd/es/icon',
+      'react-router',
+      'react-router-dom',
+      'antd',
+      // 'antd/es/auto-complete',
+      // 'antd/es/card',
+      // 'antd/es/back-top',
+      // 'antd/es/message',
+      // 'antd/es/icon',
+      'axios',
+      'nprogress',
     ],
   },
   // 出口文件
   output: {
-    filename: '[name].[hash:5].js',
+    filename: '[name].js',
     path: utils.resolve('build'),
     chunkFilename: '[name].[hash:5].js',
     publicPath: '/',
@@ -30,8 +35,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader?compact=false'],
-        //loader with query - use: [{ loader: 'bable-loader', query: { compact: false } }]
+        use: [{ loader: 'babel-loader', query: { compact: false } }]
       },
     ]
   }, 

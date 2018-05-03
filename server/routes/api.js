@@ -1,5 +1,6 @@
 const express = require('express');
 const handlers = require('../db/handlers');
+const config = require('../config');
 
 const router = express.Router();
 
@@ -22,8 +23,12 @@ router.get('/detail', (req, res) => {
 
 // /api/update
 router.post('/update', (req, res) => {
-  const { repo } = req.body;
-  handlers.updateRepos(repo, res);
+  const { token, repo } = req.body;
+  if (token !== config.TOKEN) {
+    res.json({ ok: false, message: '没有权限！' });
+  } else {
+    handlers.updateRepos(repo, res);
+  }
 });
 
 module.exports = router;

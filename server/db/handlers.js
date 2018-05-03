@@ -38,6 +38,7 @@ exports.queryRepoDetailByName = async (q, res) => {
 
 // 新增、更新数据
 exports.updateRepos = async (repo, res) => {
+  console.log({repo});
   try {
     const { name, ...ret } = repo;
     const exit = await Repo.find({ name }).exec();

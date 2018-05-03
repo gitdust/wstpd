@@ -17,6 +17,9 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_NAME = process.env.DB_NAME;
 const DB_COLLECTION = process.env.DB_COLLECTION;
 
+// admin token
+const TOKEN = process.env.TOKEN;
+
 const CORS_ERR = 'Not allowed by CORS';
 
 module.exports = {
@@ -30,4 +33,5 @@ module.exports = {
   DB_PASSWORD,
   DB_NAME,
   DB_COLLECTION,
+  TOKEN,
 };
