@@ -2,8 +2,9 @@ import * as env from '@/env';
 import * as globalMessage from './feedback';
 
 window.onerror = (message, source, lineno, colno) => {
-  const msg = {}; // 收集客户端错误信息
-  // msg.userAgent = window.navigator.userAgent;
+  // 收集客户端错误信息
+  const msg = {}; 
+  msg.userAgent = window.navigator.userAgent;
   msg.message = message;
   msg.source = source;
   msg.lineno = lineno;
@@ -14,8 +15,8 @@ window.onerror = (message, source, lineno, colno) => {
   }
   if (env.PRO) {
     const img = new Image();
-    img.src = `/api/client?error=${msg}`;
+    img.src = `/api/client?error=${JSON.stringify(msg)}`;
   }
-  // TODO: 运行时错误友好处理方式以及使用图像Ping进行错误收集
+  // TODO: 运行时错误跳转页面
   globalMessage.error(message);
 };

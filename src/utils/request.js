@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as env from '@/env';
 import * as globalMessage from './feedback';
 import * as globalLoading from './loading';
+import './polyfill';
 
 const defaultConfig = {
   baseURL: env.API_HOST,
