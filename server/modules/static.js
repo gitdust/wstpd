@@ -9,5 +9,5 @@ const staticCache = (req, res, next) => {
 
 module.exports = (app) => {
   app.use('/', staticCache);
-  app.use('/', express.static(path.resolve('build')));
+  app.use('/', express.static(path.resolve('dist')));
 };

@@ -15,19 +15,20 @@ const CPUS = os.cpus().length <= 0 ? 1 : os.cpus().length;
 // 自定义 path.resolve
 const resolve = (...args) => path.resolve.apply(path, args); 
 // 自定义 path.resolve
-const join = (...args) => path.join.apply(path, args); 
+const join = (...args) => path.join.apply(path, args);
 
 const SRC = 'src';
 const DIST = 'dist';
 const PUBLIC = 'public';
 
 // webpack-dev-server contentBase
-const CONTENTBASE = resolve(SRC);
+const CONTENTBASE = resolve(PUBLIC);
 // webpack output path
 const OUTPUTPATH = resolve(DIST);
 // webpack publicPath
 const PUBLICPATH = '/';
 // webpack entry
+// TODO: 多页应用
 const ENTRY = resolve(SRC, 'main.js');
 
 // webpack 编译脚本环境变量设置
@@ -51,7 +52,6 @@ const UglifyJsPlugin = () => new UglifyJsParallelPlugin({
     drop_console: false,
     // 内嵌定义了但是只用到一次的变量
     collapse_vars: true,
-
     drop_debugger: true,
     // 提取出出现多次但是没有定义成变量去引用的静态值
     reduce_vars: true,
@@ -91,12 +91,13 @@ const VENDORS = {
     'react-router-dom',
     'axios', 
     'nprogress',
-  ]
+  ],
 };
 
-const DLLPath = DEV
-  ? resolve(SRC, 'statics', 'scripts')
-  : resolve(PUBLIC, 'statics', 'scripts');
+// const DLLPath = DEV
+//   ? resolve(SRC, 'statics', 'scripts')
+//   : resolve(PUBLIC, 'statics', 'scripts');
+const DLLPath = resolve(PUBLIC, 'statics', 'scripts');
 
 const DLLPlugin = () => new webpack.DllPlugin({
   path: join(DLLPath, '[name].manifest.json'), // manifest.json 输出路径

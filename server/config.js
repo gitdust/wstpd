@@ -7,7 +7,7 @@ const DEV = process.env.NODE_ENV === 'development';
 const PRO = process.env.NODE_ENV === 'production';
 
 // TODO: 端口由集成工具传参
-const PORT = PRO ? 3000 : 3001;
+const PORT = PRO ? 3002 : 3003;
 
 // 数据库信息
 const DB_DOMAIN = process.env.DB_DOMAIN;

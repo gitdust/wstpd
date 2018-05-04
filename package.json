@@ -8,8 +8,8 @@
     "dll.pro": "NODE_ENV=production npx webpack --config ./webpack/dll.js",
     "web": "NODE_ENV=development npx webpack-dev-server --config ./webpack/dev.js",
     "server": "npx nodemon ./server/www",
-    "build": "NODE_ENV=production npx webpack --config ./webpack/prod.js",
-    "start": "NODE_ENV=production DEBUG=node:* node ./server/www.js",
+    "build": "node ./scripts/build.js",
+    "start": "npx pm2 start ecosystem.config.js && npx pm2 monit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -50,6 +50,7 @@
     "ncp": "^2.0.0",
     "nodemon": "^1.17.3",
     "ora": "^2.1.0",
+    "pm2": "^2.10.3",
     "postcss": "^6.0.21",
     "postcss-loader": "^2.1.4",
     "rimraf": "^2.6.2",

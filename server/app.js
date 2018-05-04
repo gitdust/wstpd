@@ -22,6 +22,7 @@ app.use(helmet());
 if (config.PRO) {
   // 线上才应用 HTML5 History API
   app.use(history({
+    htmlAcceptHeaders: ['text/html'],
     rewrites: [
       { from: /\//, to: '/index.html' },
     ],

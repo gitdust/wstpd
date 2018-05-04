@@ -12,17 +12,17 @@ module.exports = WebpackMerge(base, {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'less-loader']
+          use: ['css-loader', 'postcss-loader', 'less-loader'],
         }),
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader']
+          use: ['css-loader'],
         }),
       },
-    ]
+    ],
   },
   plugins: [
     utils.UglifyJsPlugin(),
@@ -31,6 +31,6 @@ module.exports = WebpackMerge(base, {
     // 单独处理 manifest
     new WebpackMd5Hash(),
     // conenthash 代表的是文本文件内容的 hash 值
-    new ExtractTextPlugin('[name].[contenthash:5].css?v=[contenthash:5]'),
-  ]
+    new ExtractTextPlugin('[name].[contenthash:5].css'),
+  ],
 })

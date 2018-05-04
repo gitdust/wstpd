@@ -6,7 +6,7 @@ const config = require('../config');
 
 
 /** 白名单 */
-const whiteList = config.DEV ? 'http://localhost:3000' : 'https://packagejson.cn';
+const whiteList = config.DEV ? 'http://localhost:3002' : 'https://packagejson.cn';
 
 module.exports = (app) => {
   app.all('*', (req, res, next) => {

@@ -22,6 +22,7 @@ module.exports = {
   // 入口文件
   entry: {
     app: utils.ENTRY,
+    // TODO: 按需加载
     ui: [
       'antd',
       // 'antd/es/auto-complete',
@@ -29,7 +30,7 @@ module.exports = {
       // 'antd/es/back-top',
       // 'antd/es/message',
       // 'antd/es/icon',
-    ]
+    ],
   },
   // 出口文件
   output: {
@@ -46,7 +47,7 @@ module.exports = {
         exclude: /node_modules/,
         use: 'happypack/loader?id=jsx',
       },
-    ]
+    ],
   }, 
   // 插件
   plugins: [
@@ -54,6 +55,7 @@ module.exports = {
     ...utils.DLLReferencePlugin(),
     new HtmlWebpackPlugin({
       template: utils.resolve('public', 'index.html'),
+      favicon: utils.resolve('public', 'favicon.ico'),
       // 会在打包好的bundle.js后面加上hash串
       hash: true,
       inject: false,

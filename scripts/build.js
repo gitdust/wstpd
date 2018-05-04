@@ -1,27 +1,29 @@
-const ora = require("ora");
-const rm = require("rimraf");
-const chalk = require("chalk");
-const ncp = require("ncp").ncp;
-const webpack = require("webpack");
-const webpackConfig = require("../webpack/prod");
-const utils = require("../webpack/utils");
+process.env.NODE_ENV = 'production';
+
+const ora = require('ora');
+const rm = require('rimraf');
+const chalk = require('chalk');
+const ncp = require('ncp').ncp;
+const webpack = require('webpack');
+const webpackConfig = require('../webpack/prod');
+const utils = require('../webpack/utils');
 
 ncp.limit = 16;
-const spinner = ora("building for production...");
+const spinner = ora('building for production...');
 spinner.start();
 
-rm(utils.resolve("dist/*"), err => {
+rm(utils.resolve('dist/*'), err => {
   if (err) {
     throw err;
   }
   ncp(
-    utils.resolve("public", "statics"),
-    utils.resolve("dist"),
+    utils.resolve('public', 'statics'),
+    utils.resolve('dist', 'statics'),
     function(err) {
       if (err) {
         return console.error(err);
       }
-      console.log(chalk.green("statics copy complete.\n"));
+      console.log(chalk.green('statics copy complete.\n'));
     },
   );
   webpack(webpackConfig, (err, stats) => {
@@ -37,14 +39,14 @@ rm(utils.resolve("dist/*"), err => {
         children: false,
         chunks: false,
         chunkModules: false,
-      }) + "\n\n",
+      }) + '\n\n',
     );
 
     if (stats.hasErrors()) {
-      console.log(chalk.red("Build failed with errors.\n"));
+      console.log(chalk.red('Build failed with errors.\n'));
       process.exit(1);
     }
 
-    console.log(chalk.green("Build complete.\n"));
+    console.log(chalk.green('Build complete.\n'));
   });
 });

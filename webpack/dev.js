@@ -8,7 +8,7 @@ module.exports = WebpackMerge(base, {
   // 开发服务器配置
   devServer: {
     host: 'localhost',
-    port: 3000,
+    port: 3002,
     contentBase: utils.CONTENTBASE,
     publicPath: utils.PUBLICPATH,
     hot: true,
@@ -28,10 +28,10 @@ module.exports = WebpackMerge(base, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
 })
