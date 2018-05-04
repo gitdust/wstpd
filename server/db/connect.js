@@ -6,11 +6,11 @@ const Promise = require('bluebird');
 mongoose.Promise = Promise;
 
 let CONNECT_STRING = 'mongodb://';
-CONNECT_STRING += `${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`;
-// if (config.DEV) {
-// } else {
-//   CONNECT_STRING += `${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`
-// }
+if (config.DEV) {
+  CONNECT_STRING += `${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`;
+} else {
+  CONNECT_STRING += `${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_DOMAIN}:${config.DB_PORT}/${config.DB_NAME}`
+}
 // log(CONNECT_STRING);
 mongoose.connect(CONNECT_STRING);
 
