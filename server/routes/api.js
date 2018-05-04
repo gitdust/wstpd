@@ -31,4 +31,11 @@ router.post('/update', (req, res) => {
   }
 });
 
+// /api/client
+// 收集客户端报错，主要是手机浏览器的问题
+router.get('/client', (req, res) => {
+  console.log(req.query);
+  res.json({ ok: true });
+});
+
 module.exports = router;

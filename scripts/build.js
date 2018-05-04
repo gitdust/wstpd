@@ -12,7 +12,13 @@ ncp.limit = 16;
 const spinner = ora('building for production...');
 spinner.start();
 
-rm(utils.resolve('dist/*'), err => {
+rm(utils.resolve('logs/*'), (err) => {
+  if (err) {
+    throw err;
+  }
+});
+
+rm(utils.resolve('dist/*'), (err) => {
   if (err) {
     throw err;
   }

@@ -12,7 +12,10 @@ window.onerror = (message, source, lineno, colno) => {
   if (env.DEV) {
     console.log('client error:', msg);
   }
+  if (env.PRO) {
+    const img = new Image();
+    img.src = `/api/client?error=${msg}`;
+  }
   // TODO: 运行时错误友好处理方式以及使用图像Ping进行错误收集
   globalMessage.error(message);
-  // window.setTimeout(() => { window.location.reload(true); }, 3000);
 };
