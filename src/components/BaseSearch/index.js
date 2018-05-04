@@ -4,6 +4,8 @@ import { AutoComplete } from 'antd';
 
 import * as helper from './helper';
 
+const Option = AutoComplete.Option;
+
 class BaseSearch extends Component {
   static defaultProps = {
     onSearch: () => {},
@@ -16,29 +18,27 @@ class BaseSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: [],
+      data: [],
     };
     this.onSearch = this.onSearch.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.renderOptions = this.renderOptions.bind(this);
   }
   // 搜索
   onSearch(value) {
-    // console.log('on-search', { value });
     if (!value) {
       this.props.onSearch();
       return;
     }
     helper.queryRepoByName(value).then((result) => {
-      // console.log({result});
       const { ok, data } = result;
       if (ok) {
-        this.setState({ dataSource: data });
+        this.setState({ data });
       }
     });
   }
   // 选择
   onSelect(value, option) {
-    // console.log('on-select', { value, option });
     if (!value) {
       return;
     }
@@ -49,8 +49,12 @@ class BaseSearch extends Component {
       }
     });
   }
+  // 渲染下拉数据
+  renderOptions() {
+    const { data } = this.state;
+    return data.map(option => <Option key={option._id}>{option.name}</Option>)
+  }
   render() {
-    const { dataSource } = this.state;
     const debounceSearch = helper.debounce(this.onSearch, 500);
     return (
       <AutoComplete
@@ -58,11 +62,12 @@ class BaseSearch extends Component {
         aotuFocus
         backfill
         style={{ width: '100%' }}
-        dataSource={dataSource}
         placeholder="Search package name in your package.json"
         onSelect={this.onSelect}
         onSearch={debounceSearch}
-      />
+      >
+        { this.renderOptions() }
+      </AutoComplete>
     );
   }
 }

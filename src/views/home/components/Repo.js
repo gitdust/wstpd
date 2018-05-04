@@ -7,6 +7,7 @@ import BaseLink from '@/components/BaseLink';
 const Title = ({ repo }) => [
   <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>,
 ];
+
 const Extra = ({ repo }) => [
   <BaseLink key="github-page" url={repo.githubPage}>
     <Icon type="github" />
@@ -24,6 +25,7 @@ class Repo extends Component {
     const { repo } = this.props;
     return (
       <Card
+        hoverable
         title={<Title repo={repo} />}
         extra={<Extra repo={repo} />}
       >

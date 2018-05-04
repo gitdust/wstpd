@@ -4,7 +4,8 @@ const Repo = require('./models').RepoAbstract;
 // 首页随机获取仓库显示
 exports.getRandomRepos = async (res) => {
   try {
-    const result = await Repo.find().exec();
+    // TODO: 按照搜索热度随机获取
+    const result = await Repo.find().limit(7).exec();
     res.json({ ok: true, data: result });
   } catch (error) {
     log('handler - getRandomRepos error:', error);
@@ -16,19 +17,17 @@ exports.getRandomRepos = async (res) => {
 exports.queryRepoByName = async (q, res) => {
   try {
     const result = await Repo.find({ name: { $regex: q, $options: 'i' } }).select('name').exec();
-    let data = [];
-    result.forEach(r => data.push(r.name));
-    res.json({ ok: true, data });
+    res.json({ ok: true, data: result });
   } catch (error) {
     log('handler - queryRepoByName error:', error);
     res.json({ ok: false, message: error.message });
   }
 }
 
-// 根据仓库名字返回仓库详细信息
+// 根据数据 _id 返回仓库详细信息
 exports.queryRepoDetailByName = async (q, res) => {
   try {
-    const result = await Repo.findOne({ name: q }).exec();
+    const result = await Repo.findOne({ _id: q }).exec();
     res.json({ ok: true, data: result });
   } catch (error) {
     log('handler - queryRepoDetailByName error:', error);

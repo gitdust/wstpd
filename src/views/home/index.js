@@ -36,7 +36,10 @@ class Main extends Component {
     if (this.state.repo) {
       return (<Repo repo={repo} />);
     }
-    return repos.map(r => <Repo key={r.name} repo={r} />);
+    if (repos.length) {
+      return repos.map(r => <Repo key={r._id} repo={r} />);
+    }
+    return 'Something wrong, buddy!';
   }
   render() {
     return [
