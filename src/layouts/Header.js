@@ -7,7 +7,9 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <h1>WSTPD</h1>
+        <a href="/">
+          <img alt="logo" className="logo" src="/statics/images/logo.png" /> 
+        </a>
         <BaseLink url="https://github.com/gitdust/wstpd">
           <Icon type="github" />
         </BaseLink>

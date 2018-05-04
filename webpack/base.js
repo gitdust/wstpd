@@ -22,14 +22,12 @@ module.exports = {
   // 入口文件
   entry: {
     app: utils.ENTRY,
-    // TODO: 按需加载
     ui: [
-      'antd',
-      // 'antd/es/auto-complete',
-      // 'antd/es/card',
-      // 'antd/es/back-top',
-      // 'antd/es/message',
-      // 'antd/es/icon',
+      'antd/es/auto-complete',
+      'antd/es/card',
+      'antd/es/back-top',
+      'antd/es/message',
+      'antd/es/icon',
     ],
   },
   // 出口文件
@@ -60,6 +58,7 @@ module.exports = {
       hash: true,
       inject: false,
       minify: utils.DEV ? false : minifyConfig,
+      cache: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'ui' }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }), // 公共 js 和其引用的文件的映射关系文件，名称固定
