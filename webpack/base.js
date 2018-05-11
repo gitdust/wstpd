@@ -16,6 +16,8 @@ const minifyConfig = {
   collapseWhitespace: true,
   // 删除换行
   preserveLineBreaks: false,
+  collapseInlineTagWhitespace: true,
+  removeRedundantAttributes: true,
 };
 
 module.exports = {
@@ -32,8 +34,8 @@ module.exports = {
   },
   // 出口文件
   output: {
-    filename: '[name].js',
     path: utils.OUTPUTPATH,
+    filename: '[name].[hash:5].js',
     chunkFilename: '[name].[hash:5].js',
     publicPath: utils.PUBLICPATH,
   },
@@ -49,8 +51,6 @@ module.exports = {
   }, 
   // 插件
   plugins: [
-    utils.DefinePlugin(),
-    ...utils.DLLReferencePlugin(),
     new HtmlWebpackPlugin({
       template: utils.resolve('public', 'index.html'),
       favicon: utils.resolve('public', 'favicon.ico'),
@@ -61,8 +61,13 @@ module.exports = {
       cache: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'ui' }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }), // 公共 js 和其引用的文件的映射关系文件，名称固定
+    // 公共 js 和其引用的文件的映射关系文件，名称固定
+    new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
+    // scope hoisting
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    utils.DefinePlugin(),
     utils.HappyJSPlugin(),
+    ...utils.DLLReferencePlugin(),
   ],
   resolve: {
     alias: {

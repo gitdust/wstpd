@@ -14,7 +14,7 @@ const CPUS = os.cpus().length <= 0 ? 1 : os.cpus().length;
 
 // 自定义 path.resolve
 const resolve = (...args) => path.resolve.apply(path, args); 
-// 自定义 path.resolve
+// 自定义 path.join
 const join = (...args) => path.join.apply(path, args);
 
 const SRC = 'src';
@@ -81,7 +81,7 @@ const HappyJSPlugin = () => new HappyPack(
   },
 );
 
-/** 第三方库 */
+// 第三方库
 const VENDORS = {
   frame: [
     'react',
@@ -94,6 +94,7 @@ const VENDORS = {
   ],
 };
 
+// TODO: dev环境使用非压缩库
 // const DLLPath = DEV
 //   ? resolve(SRC, 'statics', 'scripts')
 //   : resolve(PUBLIC, 'statics', 'scripts');

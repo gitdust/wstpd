@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const utils = require('./utils');
 
@@ -15,6 +16,8 @@ let dllConfig = {
   plugins: [
     utils.DefinePlugin(),
     utils.DLLPlugin(),
+    // scope hoisting
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ],
 };
 
