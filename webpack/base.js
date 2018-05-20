@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const utils = require('./utils');
@@ -35,9 +36,9 @@ module.exports = {
   // 出口文件
   output: {
     path: utils.OUTPUTPATH,
+    publicPath: utils.PUBLICPATH,
     filename: '[name].[hash:5].js',
     chunkFilename: '[name].[hash:5].js',
-    publicPath: utils.PUBLICPATH,
   },
   // 处理对应模块
   module: {
@@ -52,8 +53,8 @@ module.exports = {
   // 插件
   plugins: [
     new HtmlWebpackPlugin({
-      template: utils.resolve('public', 'index.html'),
-      favicon: utils.resolve('public', 'favicon.ico'),
+      template: path.resolve('public', 'index.html'),
+      favicon: path.resolve('public', 'favicon.ico'),
       // 会在打包好的bundle.js后面加上hash串
       hash: true,
       inject: false,
@@ -71,7 +72,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      '@': utils.resolve('src'),
+      '@': path.resolve('src'),
     },
   },
 };
