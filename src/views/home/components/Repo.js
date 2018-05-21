@@ -4,9 +4,12 @@ import { Card, Icon } from 'antd';
 
 import BaseLink from '@/components/BaseLink';
 
-const Title = ({ repo }) => [
-  <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>,
-];
+const Title = ({ repo }) => {
+  if (repo.homepage) {
+    return <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>;
+  }
+  return `${repo.name}(无主页)`;
+}
 
 const Extra = ({ repo }) => [
   <BaseLink key="github-page" url={repo.githubPage}>
