@@ -1,5 +1,6 @@
 process.env.NODE_ENV = 'production';
 
+const path = require('path');
 const ora = require('ora');
 const rm = require('rimraf');
 const chalk = require('chalk');
@@ -12,19 +13,19 @@ ncp.limit = 16;
 const spinner = ora('building for production...');
 spinner.start();
 
-rm(utils.resolve('logs/*'), (err) => {
+rm(path.resolve('logs/*'), (err) => {
   if (err) {
     throw err;
   }
 });
 
-rm(utils.resolve('dist/*'), (err) => {
+rm(path.resolve('dist/*'), (err) => {
   if (err) {
     throw err;
   }
   ncp(
-    utils.resolve('public', 'statics'),
-    utils.resolve('dist', 'statics'),
+    path.resolve('public', 'statics'),
+    path.resolve('dist', 'statics'),
     function(err) {
       if (err) {
         return console.error(err);
