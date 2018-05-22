@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon } from 'antd';
+import { Card, Icon, Tag } from 'antd';
 
 import BaseLink from '@/components/BaseLink';
 
@@ -29,10 +29,18 @@ class Repo extends Component {
     return (
       <Card
         hoverable
+        bodyStyle={{ padding: '16px' }}
         title={<Title repo={repo} />}
         extra={<Extra repo={repo} />}
       >
-        { repo.describe }
+        <div>{ repo.describe }</div>
+        <div>
+          {/* TODO: Tag 抽象 */}
+          { repo.isBrowser && <Tag color="#4285f4">Browser</Tag> }
+          { repo.isNodejs && <Tag color="#34a853">Node.js</Tag> }
+          { repo.isMaintain && <Tag color="#fbbc05">Not Maintain</Tag>}
+          { repo.isDeprecated && <Tag color="#ea4335">Deprecated</Tag> }
+        </div>
       </Card>
     );
   }
