@@ -1,7 +1,7 @@
+const path = require('path');
 const webpack = require('webpack');
 const base = require('./base');
 const WebpackMerge = require('webpack-merge');
-const utils = require('./utils');
 
 module.exports = WebpackMerge(base, {
   devtool: 'cheap-module-source-map',
@@ -9,8 +9,8 @@ module.exports = WebpackMerge(base, {
   devServer: {
     host: 'localhost',
     port: 3002,
-    contentBase: utils.CONTENTBASE,
-    publicPath: utils.PUBLICPATH,
+    contentBase: path.resolve('public'),
+    publicPath: '/',
     hot: true,
     inline: true,
     historyApiFallback: true,

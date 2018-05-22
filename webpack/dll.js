@@ -6,9 +6,8 @@ const utils = require('./utils');
 let dllConfig = {
   entry: utils.VENDORS,
   output: {
-    // publicPath: 'http://host:port/build', // cdn
     path: utils.DLLPath,
-    // TODO: [name].[hash].js 映射
+    // TODO: [name].[hash].js 使用
     filename: '[name].js',
     // 暴露的全局对象名，与 webpack.DllPlugin.name 保持一致
     library: '[name]_library',
@@ -23,6 +22,9 @@ let dllConfig = {
 
 if (utils.PRO) {
   dllConfig = merge(dllConfig, {
+    // output: {
+    //   publicPath: 'http://host:port/build', // cdn
+    // },
     plugins: [
       utils.UglifyJsPlugin(),
     ],

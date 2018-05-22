@@ -2,58 +2,58 @@ process.env.NODE_ENV = 'production';
 
 const path = require('path');
 const ora = require('ora');
-const rm = require('rimraf');
-const chalk = require('chalk');
-const ncp = require('ncp').ncp;
+const fs = require('fs-extra');
+const signale = require('signale');
 const webpack = require('webpack');
 const webpackConfig = require('../webpack/prod');
-const utils = require('../webpack/utils');
 
-ncp.limit = 16;
-const spinner = ora('building for production...');
+const spinner = ora('Start building...\n');
+
 spinner.start();
 
-rm(path.resolve('logs/*'), (err) => {
+// 清除 logs 目录
+try {
+  fs.emptyDir(path.resolve('logs'));
+  signale.success('logs clear successfully!\n');
+} catch (err) {
+  console.error(err);
+}
+
+// 清除 dist 目录
+try {
+  fs.emptyDir(path.resolve('dist'));
+  signale.success('dist clear successfully!\n');
+} catch (err) {
+  console.error(err);
+}
+
+spinner.text = 'Start webpack...\n';
+
+setTimeout(() => {
+  spinner.text = 'Webpack building...';
+}, 1000);
+
+webpack(webpackConfig, (err, stats) => {
   if (err) {
-    throw err;
+    signale.fatal(err);
+    process.exit(1);
   }
-});
+  process.stdout.write(`${stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false,
+  })}\n\n`);
 
-rm(path.resolve('dist/*'), (err) => {
-  if (err) {
-    throw err;
+  if (stats.hasErrors()) {
+    signale.fatal('Build failed with errors.\n');
+    process.exit(1);
   }
-  ncp(
-    path.resolve('public', 'statics'),
-    path.resolve('dist', 'statics'),
-    function(err) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log(chalk.green('statics copy complete.\n'));
-    },
-  );
-  webpack(webpackConfig, (err, stats) => {
-    spinner.stop();
-    if (err) {
-      throw err;
-    }
-    process.stdout.write(
-      stats.toString({
-        colors: true,
-        modules: false,
-        // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
-        children: false,
-        chunks: false,
-        chunkModules: false,
-      }) + '\n\n',
-    );
+  // 移动 dll 脚本
+  spinner.text = 'copy dll scripts...';
+  fs.copySync(path.resolve('public', 'statics', 'js'), path.resolve('dist', 'statics', 'js'));
 
-    if (stats.hasErrors()) {
-      console.log(chalk.red('Build failed with errors.\n'));
-      process.exit(1);
-    }
-
-    console.log(chalk.green('Build complete.\n'));
-  });
+  signale.success('Build complete.\n');
+  spinner.stop();
 });

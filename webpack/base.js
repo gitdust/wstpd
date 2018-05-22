@@ -24,7 +24,7 @@ const minifyConfig = {
 module.exports = {
   // 入口文件
   entry: {
-    app: utils.ENTRY,
+    app: path.resolve('src', 'main.js'),
     ui: [
       'antd/es/auto-complete',
       'antd/es/card',
@@ -35,8 +35,9 @@ module.exports = {
   },
   // 出口文件
   output: {
-    path: utils.OUTPUTPATH,
-    publicPath: utils.PUBLICPATH,
+    path: path.resolve('dist'),
+    // TODO: cdn
+    publicPath: '/',
     filename: '[name].[hash:5].js',
     chunkFilename: '[name].[hash:5].js',
   },
@@ -48,6 +49,11 @@ module.exports = {
         exclude: /node_modules/,
         use: 'happypack/loader?id=jsx',
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: 'url-loader?limit=8192&name=statics/img/[name]-[hash:5].[ext]',
+        exclude: /node_modules/,
+      },
     ],
   }, 
   // 插件
@@ -56,16 +62,13 @@ module.exports = {
       template: path.resolve('public', 'index.html'),
       favicon: path.resolve('public', 'favicon.ico'),
       // 会在打包好的bundle.js后面加上hash串
-      hash: true,
-      inject: false,
-      minify: utils.DEV ? false : minifyConfig,
       cache: true,
+      hash: true,
+      minify: utils.DEV ? false : minifyConfig,
     }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'ui' }),
     // 公共 js 和其引用的文件的映射关系文件，名称固定
     new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
-    // scope hoisting
-    new webpack.optimize.ModuleConcatenationPlugin(),
     utils.DefinePlugin(),
     utils.HappyJSPlugin(),
     ...utils.DLLReferencePlugin(),
@@ -73,6 +76,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve('src'),
+      statics: path.resolve('public', 'statics'),
     },
   },
 };

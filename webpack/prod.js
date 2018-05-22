@@ -5,14 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 // const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 // new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' })
-// const CompressionPlugin = require('compression-webpack-plugin');
-// new CompressionPlugin({
-//   asset: '[path].gz[query]',
-//   algorithm: 'gzip',
-//   test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-//   threshold: 10240,
-//   minRatio: 0.8,
-// })
+const CompressionPlugin = require('compression-webpack-plugin');
+
 const utils = require('./utils');
 
 module.exports = WebpackMerge(base, {
@@ -52,5 +46,14 @@ module.exports = WebpackMerge(base, {
     new WebpackMd5Hash(),
     // conenthash 代表的是文本文件内容的 hash 值
     new ExtractTextPlugin('[name].[contenthash:5].css'),
+    // scope hoisting
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
   ],
 })

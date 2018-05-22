@@ -12,20 +12,6 @@ const HappyPack = require('happypack');
 // cpu 个数
 const CPUS = os.cpus().length <= 0 ? 1 : os.cpus().length; 
 
-const SRC = 'src';
-const DIST = 'dist';
-const PUBLIC = 'public';
-
-// webpack-dev-server contentBase
-const CONTENTBASE = path.resolve(PUBLIC);
-// webpack output path
-const OUTPUTPATH = path.resolve(DIST);
-// webpack publicPath
-const PUBLICPATH = '/';
-// webpack entry
-// TODO: 多页应用
-const ENTRY = path.resolve(SRC, 'main.js');
-
 // webpack 编译脚本环境变量设置
 const DefinePlugin = () => new webpack.DefinePlugin({
   'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
@@ -93,7 +79,7 @@ const VENDORS = {
 // const DLLPath = DEV
 //   ? resolve(SRC, 'statics', 'scripts')
 //   : resolve(PUBLIC, 'statics', 'scripts');
-const DLLPath = path.resolve(PUBLIC, 'statics', 'scripts');
+const DLLPath = path.resolve('public', 'statics', 'js');
 
 const DLLPlugin = () => new webpack.DllPlugin({
   path: path.join(DLLPath, '[name].manifest.json'), // manifest.json 输出路径
@@ -118,10 +104,6 @@ module.exports = {
   DEV,
   PRO,
   VENDORS,
-  ENTRY,
-  CONTENTBASE,
-  OUTPUTPATH,
-  PUBLICPATH,
   DefinePlugin,
   // CssLoaderQuery,
   UglifyJsPlugin,

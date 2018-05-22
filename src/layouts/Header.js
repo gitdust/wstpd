@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <header>
         <a href="/">
-          <img alt="logo" className="logo" src="/statics/images/logo.png" /> 
+          <img alt="logo" className="logo" src="~statics/img/logo.png" /> 
         </a>
         <BaseLink url="https://github.com/gitdust/wstpd">
           <Icon type="github" />
