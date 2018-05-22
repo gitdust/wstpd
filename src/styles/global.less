@@ -32,14 +32,15 @@ header {
 
 main {
   flex: 1;
-}
-section {
-  padding: 10px 30px;
-  &.result {
-    &>div {
-      margin-bottom: 10px;
-      &:last-child {
-        margin-bottom: 0;
+  overflow: auto;
+  section {
+    padding: 10px 30px;
+    &.result {
+      &>div {
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -50,6 +51,7 @@ footer {
   width: 100%;
   line-height: 1.5;
   text-align: center;
+  z-index: 1;
 }
 
 
