@@ -31,6 +31,10 @@ module.exports = {
       'antd/es/back-top',
       'antd/es/message',
       'antd/es/icon',
+      'antd/es/row',
+      'antd/es/col',
+      'antd/es/checkbox',
+      'antd/es/tag',
     ],
   },
   // 出口文件
@@ -38,8 +42,8 @@ module.exports = {
     path: path.resolve('dist'),
     // TODO: cdn
     publicPath: '/',
-    filename: '[name].[hash:5].js',
-    chunkFilename: '[name].[hash:5].js',
+    filename: 'statics/js/[name].[hash:5].js',
+    chunkFilename: 'statics/js/[name].[hash:5].js',
   },
   // 处理对应模块
   module: {
@@ -76,7 +80,6 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve('src'),
-      statics: path.resolve('public', 'statics'),
     },
   },
 };

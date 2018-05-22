@@ -31,7 +31,7 @@ spinner.text = 'Start webpack...\n';
 
 setTimeout(() => {
   spinner.text = 'Webpack building...';
-}, 1000);
+}, 500);
 
 webpack(webpackConfig, (err, stats) => {
   if (err) {
@@ -50,9 +50,9 @@ webpack(webpackConfig, (err, stats) => {
     signale.fatal('Build failed with errors.\n');
     process.exit(1);
   }
-  // 移动 dll 脚本
-  spinner.text = 'copy dll scripts...';
+  // 移动 dll 脚本和图片
   fs.copySync(path.resolve('public', 'statics', 'js'), path.resolve('dist', 'statics', 'js'));
+  fs.copySync(path.resolve('public', 'statics', 'img'), path.resolve('dist', 'statics', 'img'));
 
   signale.success('Build complete.\n');
   spinner.stop();

@@ -45,7 +45,7 @@ module.exports = WebpackMerge(base, {
     // 单独处理 manifest
     new WebpackMd5Hash(),
     // conenthash 代表的是文本文件内容的 hash 值
-    new ExtractTextPlugin('[name].[contenthash:5].css'),
+    new ExtractTextPlugin('statics/css/[name].[contenthash:5].css'),
     // scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CompressionPlugin({

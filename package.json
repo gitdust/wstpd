@@ -21,7 +21,10 @@
   "bugs": {
     "url": "https://github.com/gitdust/wstpd/issues"
   },
-  "eslintIgnore": ["dist/*", "node_modules/*"],
+  "eslintIgnore": [
+    "dist/*",
+    "node_modules/*"
+  ],
   "homepage": "https://github.com/gitdust/wstpd#readme",
   "devDependencies": {
     "autoprefixer": "^8.3.0",
