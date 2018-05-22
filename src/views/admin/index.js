@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input, Form, Button } from 'antd';
+import { Input, Form, Button, Row, Col, Checkbox } from 'antd';
 import BaseSearch from '@/components/BaseSearch';
 import * as api from '../api';
 
@@ -29,6 +29,7 @@ class Admin extends Component {
     const { token } = this.state;
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
+      // console.log(values);
       if (!err) {
         api.updateRepo({
           token,
@@ -51,6 +52,7 @@ class Admin extends Component {
     Object.keys(repo).forEach((key) => {
       fields[key] = { value: repo[key] }
     });
+    // console.log(fields);
     this.props.form.setFields(fields);
   }
   render() {
@@ -61,28 +63,79 @@ class Admin extends Component {
         <Input placeholder="TOKEN" value={token} onChange={this.onInputChange} style={{ margin: '10px 0' }} />
         <BaseSearch onSelect={this.onSelect} />
         <Form style={{ marginTop: 5 }}>
-          <FormItem>
-            {getFieldDecorator('name')(
+          <FormItem label="包名称">
+            {getFieldDecorator('name', {
+              initialValue: '',
+              rules: [{ required: true, message: '请输入包名称' }],
+            })(
               <Input placeholder="Package name" />,
             )}
           </FormItem>
-          <FormItem>
-            {getFieldDecorator('homepage')(
+          <FormItem label="官方主页">
+            {getFieldDecorator('homepage', {
+              initialValue: '',
+            })(
               <Input placeholder="homepage" />,
             )}
           </FormItem>
-          <FormItem>
-            {getFieldDecorator('githubPage')(
+          <FormItem label="Github主页">
+            {getFieldDecorator('githubPage', {
+              initialValue: '',
+            })(
               <Input placeholder="githubPage" />,
             )}
           </FormItem>
-          <FormItem>
-            {getFieldDecorator('describe')(
+          <FormItem label="作用描述">
+            {getFieldDecorator('describe', {
+              initialValue: '',
+            })(
               <TextArea placeholder="describe" row="4" />,
             )}
           </FormItem>
-          <FormItem>
-            <Button type="primary" onClick={this.onUpdate}>新增/更新</Button>
+          <Row>
+            <Col span={6}>
+              <FormItem>
+                {getFieldDecorator('isBrowser', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>Browser</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={6}>
+              <FormItem>
+                {getFieldDecorator('isNodejs', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>Node.js</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={6}>
+              <FormItem>
+                {getFieldDecorator('isDeprecated', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>Deprecated</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={6}>
+              <FormItem>
+                {getFieldDecorator('isMaintain', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>Not Maintain</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+          </Row>
+          <FormItem label="">
+            <Button type="primary" onClick={this.onUpdate} style={{ marginRight: '8px' }}>新增/更新</Button>
             <Button onClick={this.onReset}>重置</Button>
           </FormItem>
         </Form>
