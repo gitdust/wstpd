@@ -12,6 +12,14 @@ const RepoSchema = new Schema({
   homepage: String,
   // 作用描述
   describe: String,
+  // 能否nodejs环境使用
+  isNodejs: Boolean,
+  // 能否浏览器使用
+  isBrowser: Boolean,
+  // 是否过时
+  isDeprecated: Boolean,
+  // 是否维护
+  isMaintain: Boolean,
 }, {
   versionKey: false,
 });
