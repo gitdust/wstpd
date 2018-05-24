@@ -8,7 +8,9 @@
     "web": "NODE_ENV=development npx webpack-dev-server --config ./webpack/dev.js",
     "server": "npx nodemon ./server/www",
     "build": "node ./scripts/build.js",
+    "cdn": "node ./scripts/cdn.js",
     "start": "npx pm2 start ecosystem.config.js && npx pm2 monit",
+    "deploy": "npm run build && npm run cdn && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +29,7 @@
   ],
   "homepage": "https://github.com/gitdust/wstpd#readme",
   "devDependencies": {
+    "ali-oss": "^5.2.0",
     "autoprefixer": "^8.3.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -36,6 +39,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "co": "^4.6.0",
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
@@ -52,7 +56,6 @@
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
     "nodemon": "^1.17.3",
-    "ora": "^2.1.0",
     "pm2": "^2.10.3",
     "postcss": "^6.0.21",
     "postcss-loader": "^2.1.4",

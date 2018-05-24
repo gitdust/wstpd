@@ -17,9 +17,11 @@ class Main extends Component {
   }
   componentDidMount () {
     api.getRandomRepos().then((result) => {
-      const { ok, data } = result;
-      if (ok) {
-        this.setState({ repos: data });
+      if (result) {
+        const { ok, data } = result;
+        if (ok) {
+          this.setState({ repos: data });
+        }
       }
     });
   }

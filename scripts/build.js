@@ -1,59 +1,61 @@
 process.env.NODE_ENV = 'production';
 
 const path = require('path');
-const ora = require('ora');
 const fs = require('fs-extra');
 const signale = require('signale');
 const webpack = require('webpack');
 const webpackConfig = require('../webpack/prod');
 
-const spinner = ora('Start building...\n');
+signale.time('Start');
+signale.pending('building for production...');
 
-spinner.start();
+(async () => {
+  try {
+    // 清除 logs 目录
+    await fs.emptyDir(path.resolve('server', 'logs'));
+    signale.success('server/logs removed.');
 
-// 清除 logs 目录
-try {
-  fs.emptyDir(path.resolve('logs'));
-  signale.success('logs clear successfully!\n');
-} catch (err) {
-  console.error(err);
-}
+    // 清除 dist 目录
+    await fs.emptyDir(path.resolve('dist'));
+    signale.success('dist/ removed.');
 
-// 清除 dist 目录
-try {
-  fs.emptyDir(path.resolve('dist'));
-  signale.success('dist clear successfully!\n');
-} catch (err) {
-  console.error(err);
-}
+    signale.pending('start webpack...');
 
-spinner.text = 'Start webpack...\n';
+    webpack(webpackConfig, (errWP, stats) => {
+      if (errWP) {
+        signale.fatal(errWP);
+        process.exit(1);
+      }
+      process.stdout.write(`${stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false,
+      })}\n`);
 
-setTimeout(() => {
-  spinner.text = 'Webpack building...';
-}, 500);
+      if (stats.hasErrors()) {
+        signale.fatal('webpack building failed.');
+        process.exit(1);
+      }
 
-webpack(webpackConfig, (err, stats) => {
-  if (err) {
+      signale.success('webpack build complete.');
+      signale.pending('start move statics...');
+
+      (async () => {
+        try {
+          await fs.copy(path.resolve('public', 'statics'), path.resolve('dist', 'statics'));
+          signale.success('statics moved.');
+
+          signale.success('build complete.');
+          signale.timeEnd('Start');
+        } catch (errFS) {
+          signale.fatal(errFS);
+        }
+      })();
+    });
+  } catch (err) {
     signale.fatal(err);
-    process.exit(1);
   }
-  process.stdout.write(`${stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-  })}\n\n`);
+})();
 
-  if (stats.hasErrors()) {
-    signale.fatal('Build failed with errors.\n');
-    process.exit(1);
-  }
-  // 移动 dll 脚本和图片
-  fs.copySync(path.resolve('public', 'statics', 'js'), path.resolve('dist', 'statics', 'js'));
-  fs.copySync(path.resolve('public', 'statics', 'img'), path.resolve('dist', 'statics', 'img'));
-
-  signale.success('Build complete.\n');
-  spinner.stop();
-});

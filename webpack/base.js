@@ -21,6 +21,8 @@ const minifyConfig = {
   removeRedundantAttributes: true,
 };
 
+const PublicPath = utils.DEV ? '/' : '//packagejson.oss-cn-qingdao.aliyuncs.com/';
+
 module.exports = {
   // 入口文件
   entry: {
@@ -40,8 +42,7 @@ module.exports = {
   // 出口文件
   output: {
     path: path.resolve('dist'),
-    // TODO: cdn
-    publicPath: '/',
+    publicPath: PublicPath,
     filename: 'statics/js/[name].[hash:5].js',
     chunkFilename: 'statics/js/[name].[hash:5].js',
   },
@@ -64,7 +65,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('public', 'index.html'),
-      favicon: path.resolve('public', 'favicon.ico'),
       // 会在打包好的bundle.js后面加上hash串
       cache: true,
       hash: true,
