@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as env from '@/env';
 import * as globalMessage from './feedback';
 import * as globalLoading from './loading';
-import './polyfill';
 
 const defaultConfig = {
   baseURL: env.API_HOST,
@@ -76,12 +75,14 @@ const request = (url, config = {}) => {
   }
 
   return client.request(newConfig)
+    .then((res) => {
+      globalLoading.done();
+      return res.data;
+    })
     .catch((err) => {
+      globalLoading.done();
       globalMessage.error(err.message);
     })
-    .finally(() => {
-      globalLoading.done();
-    });
 };
 
 export default request;
