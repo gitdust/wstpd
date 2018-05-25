@@ -31,9 +31,8 @@ class BaseSearch extends Component {
       return;
     }
     helper.queryRepoByName(value).then((result) => {
-      const { ok, data } = result;
-      if (ok) {
-        this.setState({ data });
+      if (result) {
+        this.setState({ data: result });
       }
     });
   }
@@ -43,9 +42,8 @@ class BaseSearch extends Component {
       return;
     }
     helper.queryRepoDetailByName(value).then((result) => {
-      const { ok, data } = result;
-      if (ok) {
-        this.props.onSelect(data);
+      if (result) {
+        this.props.onSelect(result);
       }
     });
   }
@@ -60,7 +58,6 @@ class BaseSearch extends Component {
       <AutoComplete
         allowClear
         aotuFocus
-        backfill
         style={{ width: '100%' }}
         placeholder="Search package name in your package.json"
         onSelect={this.onSelect}
