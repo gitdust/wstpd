@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon, Tag } from 'antd';
+import { Card, Button, Tag } from 'antd';
 
 import BaseLink from '@/components/BaseLink';
 
@@ -8,12 +8,13 @@ const Title = ({ repo }) => {
   if (repo.homepage) {
     return <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>;
   }
-  return `${repo.name}(无主页)`;
+  return `${repo.name}(无官网)`;
 }
 
 const Extra = ({ repo }) => [
   <BaseLink key="github-page" url={repo.githubPage}>
-    <Icon type="github" />
+    {/* <Icon type="github" /> */}
+    <Button size="small" icon="github" />
   </BaseLink>,
 ];
 
@@ -28,8 +29,8 @@ class Repo extends Component {
     const { repo } = this.props;
     return (
       <Card
-        hoverable
-        bodyStyle={{ padding: '16px' }}
+        // hoverable
+        loading={!repo}
         title={<Title repo={repo} />}
         extra={<Extra repo={repo} />}
       >

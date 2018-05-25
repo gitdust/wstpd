@@ -20,7 +20,7 @@ a.link {
 }
 
 header {
-  padding: 0 10px;
+  padding: 0 32px;
   display: flex;
   justify-content: space-between;
   height: 60px;
@@ -32,11 +32,13 @@ header {
 
 main {
   flex: 1;
+  padding-bottom: 32px;
   section {
-    padding: 10px 30px;
+    padding: 32px;
+    padding-bottom: 0;
     &.result {
       &>div {
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         &:last-child {
           margin-bottom: 0;
         }
@@ -48,7 +50,7 @@ main {
 footer {
   box-shadow: 0 -2px 2px @white;
   width: 100%;
-  line-height: 1.5;
+  line-height: 2;
   text-align: center;
   z-index: 1;
 }
@@ -56,4 +58,8 @@ footer {
 
 .logo {
   width: 60px;
+}
+.pop-img {
+  width: 96px;
+  height: 96px;
 }
