@@ -5,7 +5,8 @@ const Repo = require('./models').RepoAbstract;
 exports.getRandomRepos = async (res) => {
   try {
     // TODO: 按照搜索热度随机获取
-    const result = await Repo.find().limit(7).exec();
+    const random = Math.random().toFixed(3);
+    const result = await Repo.find({ random: { $lt: random }}).limit(10).exec();
     res.json({ ok: true, data: result });
   } catch (error) {
     log('handler - getRandomRepos error:', error);
@@ -40,12 +41,13 @@ exports.updateRepos = async (repo, res) => {
   try {
     const { name, ...ret } = repo;
     const exit = await Repo.findOne({ name }).exec();
+    const random = Math.random();
     if (exit) {
       // 更新
-      Repo.update({ name }, { $set: { ...ret } }).exec();
+      Repo.update({ name }, { $set: { random, ...ret } }).exec();
     } else {
       // 新增
-      repo = new Repo(repo);
+      repo = new Repo({ random, ...repo });
       repo.save();
     }
     res.json({ ok: true });

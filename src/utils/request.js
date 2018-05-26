@@ -77,7 +77,7 @@ const request = (url, config = {}) => {
   return client.request(newConfig)
     .then((res) => {
       globalLoading.done();
-      return res.data;
+      return res.data || true;
     })
     .catch((err) => {
       globalLoading.done();

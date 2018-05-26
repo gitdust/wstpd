@@ -93,17 +93,17 @@ class Admin extends Component {
             )}
           </FormItem>
           <Row>
-            <Col span={6}>
+            <Col span={4}>
               <FormItem>
                 {getFieldDecorator('isBrowser', {
                   valuePropName: 'checked',
                   initialValue: false,
                 })(
-                  <Checkbox>Browser</Checkbox>,
+                  <Checkbox>浏览器</Checkbox>,
                 )}
               </FormItem>
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <FormItem>
                 {getFieldDecorator('isNodejs', {
                   valuePropName: 'checked',
@@ -113,23 +113,43 @@ class Admin extends Component {
                 )}
               </FormItem>
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <FormItem>
                 {getFieldDecorator('isDeprecated', {
                   valuePropName: 'checked',
                   initialValue: false,
                 })(
-                  <Checkbox>Deprecated</Checkbox>,
+                  <Checkbox>过时</Checkbox>,
                 )}
               </FormItem>
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <FormItem>
-                {getFieldDecorator('isMaintain', {
+                {getFieldDecorator('isNotMaintained', {
                   valuePropName: 'checked',
                   initialValue: false,
                 })(
-                  <Checkbox>Not Maintain</Checkbox>,
+                  <Checkbox>不在维护</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={4}>
+              <FormItem>
+                {getFieldDecorator('isArchived', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>归档</Checkbox>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={4}>
+              <FormItem>
+                {getFieldDecorator('isStabilized', {
+                  valuePropName: 'checked',
+                  initialValue: false,
+                })(
+                  <Checkbox>稳定</Checkbox>,
                 )}
               </FormItem>
             </Col>

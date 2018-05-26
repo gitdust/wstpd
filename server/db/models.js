@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 // 仓库列表
 const RepoSchema = new Schema({
+  random: Number,
   // 名字
   name: String,
   // github 地址
@@ -19,7 +20,11 @@ const RepoSchema = new Schema({
   // 是否过时
   isDeprecated: Boolean,
   // 是否维护
-  isMaintain: Boolean,
+  isNotMaintained: Boolean,
+  // 是否归档
+  isArchived: Boolean,
+  // 是否稳定
+  isStabilized: Boolean,
 }, {
   versionKey: false,
 });

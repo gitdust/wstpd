@@ -42,10 +42,12 @@ class Repo extends Component {
         <div>{ repo.describe }</div>
         <div>
           {/* TODO: Tag 抽象 */}
-          { repo.isBrowser && <Tag color="#4285f4">Browser</Tag> }
-          { repo.isNodejs && <Tag color="#34a853">Node.js</Tag> }
-          { repo.isMaintain && <Tag color="#fbbc05">Not Maintain</Tag>}
-          { repo.isDeprecated && <Tag color="#ea4335">Deprecated</Tag> }
+          { repo.isBrowser && <Tag color="blue">浏览器</Tag> }
+          { repo.isNodejs && <Tag color="green">Node</Tag> }
+          { repo.isNotMaintained && <Tag color="red">不再维护</Tag>}
+          { repo.isDeprecated && <Tag color="orange">过时</Tag> }
+          { repo.isArchived && <Tag color="geekblue">归档</Tag> }
+          { repo.isStabilized && <Tag color="lime">稳定</Tag> }
         </div>
       </Card>
     );
