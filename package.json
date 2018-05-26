@@ -10,7 +10,7 @@
     "build": "node ./scripts/build.js",
     "cdn": "node ./scripts/cdn.js",
     "start": "npx pm2 start ecosystem.config.js && npx pm2 monit",
-    "deploy": "npm run build && npm run cdn && npm start",
+    "deploy": "npm run build && npm run cdn",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

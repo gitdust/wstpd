@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack/prod');
 
 signale.time('Start');
-signale.wait('building for production...');
+signale.await('building for production...');
 
 (async () => {
   try {
@@ -19,7 +19,7 @@ signale.wait('building for production...');
     await fs.emptyDir(path.resolve('dist'));
     signale.success('dist/ removed.');
 
-    signale.wait('start webpack...');
+    signale.await('start webpack...');
 
     webpack(webpackConfig, (errWP, stats) => {
       if (errWP) {
@@ -40,7 +40,7 @@ signale.wait('building for production...');
       }
 
       signale.success('webpack build complete.');
-      signale.wait('start move statics...');
+      signale.await('start move statics...');
 
       (async () => {
         try {

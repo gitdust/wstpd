@@ -7,7 +7,7 @@ module.exports = {
 
     // First application
     {
-      name: 'packagejson.cn',
+      name: 'p.cn',
       // 服务内存占用300M，自动重启
       max_memory_restart: '300M',
       script: './server/www.js',
@@ -20,11 +20,6 @@ module.exports = {
         NODE_ENV: 'production',
         DEBUG: 'node:*',
       },
-    },
-    // Second application
-    {
-      name      : 'WEB',
-      script    : 'web.js',
     },
   ],
 
