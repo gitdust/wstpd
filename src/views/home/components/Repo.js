@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Tag } from 'antd';
+import { Card, Button, Tag, Icon } from 'antd';
 
 import BaseLink from '@/components/BaseLink';
 
 const Title = ({ repo }) => {
   if (repo.homepage) {
-    return <BaseLink key="repo-name" url={repo.homepage}>{ repo.name }</BaseLink>;
+    return (
+      <BaseLink key="repo-name" url={repo.homepage}>
+        <Icon type="home" />
+        { repo.name }
+      </BaseLink>
+    );
   }
-  return `${repo.name}(无官网)`;
+  return repo.name;
 }
 
 const Extra = ({ repo }) => [
