@@ -4,8 +4,8 @@
   "description": "what's the package do?",
   "main": "index.js",
   "scripts": {
-    "dll": "NODE_ENV=production npx webpack --config ./webpack/dll.js",
-    "web": "NODE_ENV=development npx webpack-dev-server --config ./webpack/dev.js",
+    "dll": "NODE_ENV=production npx webpack --config ./scripts/webpack/dll.js",
+    "web": "NODE_ENV=development npx webpack-dev-server --config ./scripts/webpack/dev.js",
     "server": "npx nodemon ./server/www",
     "build": "node ./scripts/build.js",
     "cdn": "node ./scripts/cdn.js",

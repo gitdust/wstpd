@@ -38,7 +38,7 @@ class Main extends Component {
     if (repos.length) {
       return repos.map(r => <Repo key={r._id} repo={r} />);
     }
-    return 'Something wrong, buddy!';
+    return 'Something wrong!';
   }
   render() {
     return [

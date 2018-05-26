@@ -4,10 +4,10 @@ const path = require('path');
 const fs = require('fs-extra');
 const signale = require('signale');
 const webpack = require('webpack');
-const webpackConfig = require('../webpack/prod');
+const webpackConfig = require('./webpack/prod');
 
 signale.time('Start');
-signale.pending('building for production...');
+signale.wait('building for production...');
 
 (async () => {
   try {
@@ -19,7 +19,7 @@ signale.pending('building for production...');
     await fs.emptyDir(path.resolve('dist'));
     signale.success('dist/ removed.');
 
-    signale.pending('start webpack...');
+    signale.wait('start webpack...');
 
     webpack(webpackConfig, (errWP, stats) => {
       if (errWP) {
@@ -40,7 +40,7 @@ signale.pending('building for production...');
       }
 
       signale.success('webpack build complete.');
-      signale.pending('start move statics...');
+      signale.wait('start move statics...');
 
       (async () => {
         try {

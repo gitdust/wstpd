@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Popover } from 'antd';
+import { Button, Popover, Icon } from 'antd';
 import BaseLink from '@/components/BaseLink';
-
-const PopImg = (type) => <img className="pop-img" src={`/statics/img/${type}.jpg`} alt={`${type} qrcode`} />
+import { PopImg } from '@/utils/tools';
 
 class Header extends Component {
   render() {
@@ -16,10 +15,10 @@ class Header extends Component {
             <Button icon="github" size="small">Star</Button>
           </BaseLink>
           <Popover placement="bottom" content={PopImg('weibo')} trigger="hover">
-            <Button style={{ margin: '0 8px', cursor: 'default' }} size="small" shape="circle" icon="weibo" />
+            <Icon className="my-icon" type="weibo" />
           </Popover>
           <Popover placement="bottom" content={PopImg('wechat')} trigger="hover">
-            <Button style={{ cursor: 'default' }} size="small" shape="circle" icon="wechat" />
+            <Icon className="my-icon" type="wechat" />
           </Popover>
         </span>
       </header>

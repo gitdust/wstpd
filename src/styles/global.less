@@ -33,9 +33,13 @@ header {
 main {
   flex: 1;
   padding-bottom: 32px;
+  background-image: url(/statics/img/background.png);
+  background-size: cover;
+
   section {
     padding: 32px;
     padding-bottom: 0;
+    opacity: .8;
     &.result {
       &>div {
         margin-bottom: 16px;
@@ -48,11 +52,16 @@ main {
 }
 
 footer {
-  box-shadow: 0 -2px 2px @white;
+  padding: 8px 0;
   width: 100%;
   line-height: 2;
   text-align: center;
   z-index: 1;
+  display: flex;
+  font-size: 12px;
+  span, a {
+    flex: 1;
+  }
 }
 
 
@@ -62,4 +71,7 @@ footer {
 .pop-img {
   width: 96px;
   height: 96px;
+}
+.my-icon {
+  margin-left: 8px;
 }

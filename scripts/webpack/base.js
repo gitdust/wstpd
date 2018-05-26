@@ -27,17 +27,18 @@ module.exports = {
   // 入口文件
   entry: {
     app: path.resolve('src', 'main.js'),
-    ui: [
-      'antd/es/auto-complete',
-      'antd/es/card',
-      'antd/es/back-top',
-      'antd/es/message',
-      'antd/es/icon',
-      'antd/es/row',
-      'antd/es/col',
-      'antd/es/checkbox',
-      'antd/es/tag',
-    ],
+    // ui: [
+    //   'antd/es/auto-complete',
+    //   'antd/es/card',
+    //   'antd/es/back-top',
+    //   'antd/es/message',
+    //   'antd/es/button',
+    //   'antd/es/row',
+    //   'antd/es/col',
+    //   'antd/es/checkbox',
+    //   'antd/es/tag',
+    //   'antd/es/popover',
+    // ],
   },
   // 出口文件
   output: {
@@ -70,7 +71,6 @@ module.exports = {
       hash: true,
       minify: utils.DEV ? false : minifyConfig,
     }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'ui' }),
     // 公共 js 和其引用的文件的映射关系文件，名称固定
     new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
     utils.DefinePlugin(),

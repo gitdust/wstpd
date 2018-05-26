@@ -48,7 +48,7 @@ const HappyJSPlugin = () => new HappyPack(
 
 // 第三方库
 const VENDORS = {
-  frame: [
+  base: [
     'react',
     'react-dom',
     'prop-types',

@@ -1,6 +1,10 @@
+const path = require('path');
+const fs = require('fs-extra');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const utils = require('./utils');
+
+fs.emptyDir(path.resolve('public', 'statics', 'js'));
 
 /** 默认 dev 配置 */
 let dllConfig = {
