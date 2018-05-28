@@ -59,11 +59,9 @@ const VENDORS = {
   ],
 };
 
-// TODO: dev环境使用非压缩库
-// const DLLPath = DEV
-//   ? resolve(SRC, 'statics', 'scripts')
-//   : resolve(PUBLIC, 'statics', 'scripts');
-const DLLPath = path.resolve('public', 'statics', 'js');
+const DLLPath = DEV
+  ? path.resolve('public', 'statics', 'dll')
+  : path.resolve('public', 'statics', 'js');
 
 const DLLPlugin = () => new webpack.DllPlugin({
   path: path.join(DLLPath, '[name].manifest.json'), // manifest.json 输出路径

@@ -4,7 +4,11 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const utils = require('./utils');
 
-fs.emptyDir(path.resolve('public', 'statics', 'js'));
+if (utils.PRO) { 
+  fs.emptyDir(path.resolve('public', 'statics', 'js'));
+} else {
+  fs.emptyDir(path.resolve('public', 'statics', 'dll'));
+}
 
 /** 默认 dev 配置 */
 let dllConfig = {
