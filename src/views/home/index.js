@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
 import BaseSearch from '@/components/BaseSearch';
 import * as api from '../api';
@@ -14,13 +15,10 @@ class Main extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.showRepos = this.showRepos.bind(this);
+    this.initialData = this.initialData.bind(this);
   }
   componentDidMount () {
-    api.getRandomRepos().then((result) => {
-      if (result) {
-        this.setState({ repos: result });
-      }
-    });
+    this.initialData();
   }
   // 选择
   onSelect(data) {
@@ -30,6 +28,14 @@ class Main extends Component {
   onSearch() {
     this.setState({ repo: null });
   }
+  // 初始化数据请求
+  initialData() {
+    api.getRandomRepos().then((result) => {
+      if (result) {
+        this.setState({ repos: result });
+      }
+    });
+  }
   showRepos() {
     const { repos, repo } = this.state;
     if (this.state.repo) {
@@ -38,7 +44,12 @@ class Main extends Component {
     if (repos.length) {
       return repos.map(r => <Repo key={r._id} repo={r} />);
     }
-    return 'Something wrong!';
+    return (
+      <div>
+        没有随机到数据(*&gt;﹏&lt;*)
+        <Button onClick={this.initialData} size="small" icon="reload">再试一次</Button>
+      </div>
+    );
   }
   render() {
     return [

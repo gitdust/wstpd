@@ -7,6 +7,7 @@ exports.getRandomRepos = async (res) => {
     // TODO: 按照搜索热度随机获取
     const random = Math.random().toFixed(3);
     const result = await Repo.find({ random: { $lt: random }}).limit(10).exec();
+    // const result = [];
     res.json({ ok: true, data: result });
   } catch (error) {
     log('handler - getRandomRepos error:', error);
