@@ -27,18 +27,6 @@ module.exports = {
   // 入口文件
   entry: {
     app: path.resolve('src', 'main.js'),
-    // ui: [
-    //   'antd/es/auto-complete',
-    //   'antd/es/card',
-    //   'antd/es/back-top',
-    //   'antd/es/message',
-    //   'antd/es/button',
-    //   'antd/es/row',
-    //   'antd/es/col',
-    //   'antd/es/checkbox',
-    //   'antd/es/tag',
-    //   'antd/es/popover',
-    // ],
   },
   // 出口文件
   output: {
@@ -54,6 +42,18 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'happypack/loader?id=jsx',
+      },
+      {
+        test: /\.worker\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'worker-loader',
+          options: {
+            name: '[name].[hash:5].js',
+            publicPath: 'statics/js/',
+            inline: true,
+          },
+        },
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/,

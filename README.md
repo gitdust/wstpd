@@ -29,14 +29,8 @@
 - SSR
 - webpack 4
 - PWA
-- service work
-- socket io
-- server push
-- UI 改进
-- i18n
+- web worker
 - ...
-
-所有前端可以用的技术、好玩的功能，我都会去尝试使用，欢迎学习交流。
 
 ## 本地开发
 

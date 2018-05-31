@@ -67,7 +67,8 @@
     "webpack": "3.11.0",
     "webpack-dev-server": "2.11.1",
     "webpack-md5-hash": "^0.0.6",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "worker-loader": "^2.0.0"
   },
   "dependencies": {
     "antd": "^3.4.4",
