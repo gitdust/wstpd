@@ -31,6 +31,12 @@ router.post('/update', (req, res) => {
   }
 });
 
+// /api/worker
+router.post('/worker', (req, res) => {
+  const payload = req.body;
+  handlers.getRepoInfor(payload, res);
+});
+
 // /api/client
 // 收集客户端报错，主要是手机浏览器的问题
 router.get('/client', (req, res) => {

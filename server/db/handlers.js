@@ -1,4 +1,5 @@
 const log = require('debug')("node:db.handlers");
+const octokit = require('@octokit/rest')();
 const Repo = require('./models').RepoAbstract;
 
 // 首页随机获取仓库显示
@@ -55,5 +56,19 @@ exports.updateRepos = async (repo, res) => {
   } catch (error) {
     log('handler - updateRepos error:', error);
     res.json({ ok: false, message: error.message });
+  }
+}
+
+// 通过 Github API 获取仓库信息
+exports.getRepoInfor = async (payload, res) => {
+  try {
+    console.log(payload);
+    const {data:{stargazers_count}} = await octokit.repos.get({
+      owner: 'facebook',
+      repo: 'react',
+    });
+    res.json({worker: stargazers_count})
+  } catch (error) {
+    console.log(error);
   }
 }
