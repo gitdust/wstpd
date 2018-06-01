@@ -71,18 +71,11 @@ class Admin extends Component {
               <Input placeholder="Package name" />,
             )}
           </FormItem>
-          <FormItem label="官方主页">
-            {getFieldDecorator('homepage', {
+          <FormItem label="全称">
+            {getFieldDecorator('fullName', {
               initialValue: '',
             })(
-              <Input placeholder="homepage" />,
-            )}
-          </FormItem>
-          <FormItem label="Github主页">
-            {getFieldDecorator('githubPage', {
-              initialValue: '',
-            })(
-              <Input placeholder="githubPage" />,
+              <Input placeholder="fullName" />,
             )}
           </FormItem>
           <FormItem label="作用描述">

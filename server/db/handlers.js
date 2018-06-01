@@ -7,7 +7,7 @@ exports.getRandomRepos = async (res) => {
   try {
     // TODO: 按照搜索热度随机获取
     const random = Math.random().toFixed(3);
-    const result = await Repo.find({ random: { $lt: random }}).limit(10).exec();
+    const result = await Repo.find({ random: { $lt: random }}, { random: 0 }).limit(10).exec();
     // const result = [];
     res.json({ ok: true, data: result });
   } catch (error) {
@@ -62,12 +62,13 @@ exports.updateRepos = async (repo, res) => {
 // 通过 Github API 获取仓库信息
 exports.getRepoInfor = async (payload, res) => {
   try {
-    console.log(payload);
-    const {data:{stargazers_count}} = await octokit.repos.get({
+    const {data} = await octokit.repos.get({
       owner: 'facebook',
       repo: 'react',
     });
-    res.json({worker: stargazers_count})
+    console.log(data);
+
+    res.json({worker: data.stargazers_count})
   } catch (error) {
     console.log(error);
   }

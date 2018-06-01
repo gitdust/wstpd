@@ -7,10 +7,8 @@ const RepoSchema = new Schema({
   random: Number,
   // 名字
   name: String,
-  // github 地址
-  githubPage: String,
-  // 官网地址
-  homepage: String,
+  // 全名 owner/name，如 facebook/react
+  fullName: String,
   // 作用描述
   describe: String,
   // 能否nodejs环境使用
