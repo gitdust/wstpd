@@ -49,8 +49,7 @@ module.exports = {
         use: {
           loader: 'worker-loader',
           options: {
-            name: '[name].[hash:5].js',
-            publicPath: 'statics/js/',
+            name: 'statics/js/[name].[hash:5].js',
             inline: true,
           },
         },

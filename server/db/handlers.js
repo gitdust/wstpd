@@ -1,6 +1,13 @@
+require('dotenv').config();
 const log = require('debug')("node:db.handlers");
-const octokit = require('@octokit/rest')();
 const Repo = require('./models').RepoAbstract;
+const octokit = require('@octokit/rest')();
+
+octokit.authenticate({
+  type: 'oauth',
+  key: process.env.CLIENTID,
+  secret: process.env.CLIENTSECRET,
+});
 
 // 首页随机获取仓库显示
 exports.getRandomRepos = async (res) => {
@@ -28,12 +35,12 @@ exports.queryRepoByName = async (q, res) => {
 }
 
 // 根据数据 _id 返回仓库详细信息
-exports.queryRepoDetailByName = async (q, res) => {
+exports.queryRepoDetailByID = async (q, res) => {
   try {
     const result = await Repo.findOne({ _id: q }).exec();
     res.json({ ok: true, data: result });
   } catch (error) {
-    log('handler - queryRepoDetailByName error:', error);
+    log('handler - queryRepoDetailByID error:', error);
     res.json({ ok: false, message: error.message });
   }
 }
@@ -59,17 +66,24 @@ exports.updateRepos = async (repo, res) => {
   }
 }
 
-// 通过 Github API 获取仓库信息
+// Github API 获取 repo 信息
 exports.getRepoInfor = async (payload, res) => {
   try {
-    const {data} = await octokit.repos.get({
-      owner: 'facebook',
-      repo: 'react',
-    });
-    console.log(data);
-
-    res.json({worker: data.stargazers_count})
+    for (let i = 0; i < payload.length; i++) {
+      const element = payload[i];
+      const [owner, repo] = element.fullName.split('/');
+      const { data: { stargazers_count, homepage, html_url } } = await octokit.repos.get({ owner, repo });
+      element.star = stargazers_count;
+      element.homepage = homepage;
+      element.githubpage = html_url;
+    }
+    for (let i = 0; i < payload.length; i += 1) {
+      const { fullName, ...ret } = payload[i];
+      const lastUpdateTime = Date.now();
+      Repo.update({ fullName }, { $set: { lastUpdateTime, ...ret } }).exec();
+    }
+    res.json({ data: payload });
   } catch (error) {
-    console.log(error);
+    log(error);
   }
 }

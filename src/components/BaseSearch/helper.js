@@ -2,7 +2,7 @@
 import request from '@/utils/request';
 
 const queryRepoByName = q => request('/api/query', { params: { q } });
-const queryRepoDetailByName = q => request('/api/detail', { params: { q } });
+const queryRepoDetailByID = q => request('/api/detail', { params: { q } });
 
 // 函数防抖 from lodash
 const debounce = function (func, wait, immediate) {
@@ -35,6 +35,6 @@ const debounce = function (func, wait, immediate) {
 
 export {
   queryRepoByName,
-  queryRepoDetailByName,
+  queryRepoDetailByID,
   debounce,
 }

@@ -37,11 +37,11 @@ class BaseSearch extends Component {
     });
   }
   // 选择
-  onSelect(value, option) {
-    if (!value) {
+  onSelect(id, option) {
+    if (!id) {
       return;
     }
-    helper.queryRepoDetailByName(value).then((result) => {
+    helper.queryRepoDetailByID(id).then((result) => {
       if (result) {
         this.props.onSelect(result);
       }

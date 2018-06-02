@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 // 仓库列表
 const RepoSchema = new Schema({
   random: Number,
-  // 名字
+  // package 名字
   name: String,
   // 全名 owner/name，如 facebook/react
   fullName: String,
@@ -23,6 +23,10 @@ const RepoSchema = new Schema({
   isArchived: Boolean,
   // 是否稳定
   isStabilized: Boolean,
+  homepage: String,
+  githubpage: String,
+  star: String,
+  lastUpdateTime: Number,
 }, {
   versionKey: false,
 });

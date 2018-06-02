@@ -18,7 +18,7 @@ router.get('/query', (req, res) => {
 // /api/detail
 router.get('/detail', (req, res) => {
   const { q } = req.query;
-  handlers.queryRepoDetailByName(q, res);
+  handlers.queryRepoDetailByID(q, res);
 });
 
 // /api/update
@@ -35,7 +35,7 @@ router.post('/update', (req, res) => {
 router.post('/worker', (req, res) => {
   const payload = req.body;
   handlers.getRepoInfor(payload, res);
-});
+})
 
 // /api/client
 // 收集客户端报错，主要是手机浏览器的问题

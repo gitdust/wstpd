@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Tag, Icon } from 'antd';
+import { Card, Button, Tag, Icon, Spin } from 'antd';
 
 import BaseLink from '@/components/BaseLink';
+import { Thousandth } from '@/utils/tools';
 
 const Title = ({ repo }) => {
   if (repo.homepage) {
     return (
       <BaseLink key="repo-name" url={repo.homepage}>
-        <Icon type="home" />
+        { repo.homepage && <Icon type="home" /> }
         { repo.name }
       </BaseLink>
     );
@@ -17,9 +18,8 @@ const Title = ({ repo }) => {
 }
 
 const Extra = ({ repo }) => [
-  <BaseLink key="github-page" url={repo.githubPage}>
-    {/* <Icon type="github" /> */}
-    <Button size="small" icon="github" />
+  <BaseLink key="github-page" url={repo.githubpage}>
+    <Button size="small" icon="github">{ Thousandth(repo.star) || <Spin size="small" /> }</Button>    
   </BaseLink>,
 ];
 
