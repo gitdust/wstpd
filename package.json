@@ -8,6 +8,7 @@
     "dll.pro": "NODE_ENV=production npx webpack --config ./scripts/webpack/dll.js",
     "web": "NODE_ENV=development npx webpack-dev-server --config ./scripts/webpack/dev.js",
     "server": "npx nodemon ./server/www",
+    "server.test": "NODE_ENV=development DEBUG=node:* node ./server/www",
     "build": "node ./scripts/build.js",
     "cdn": "node ./scripts/cdn.js",
     "start": "npx pm2 start ecosystem.config.js && npx pm2 monit",
