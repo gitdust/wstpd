@@ -50,6 +50,7 @@ module.exports = {
           loader: 'worker-loader',
           options: {
             name: 'statics/js/[name].[hash:5].js',
+            publicPath: '/',
           },
         },
       },

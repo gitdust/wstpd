@@ -60,7 +60,6 @@ class Main extends Component {
   onReceiveData(event) {
     const receiveData = event.data;
     if (isArray(receiveData)) {
-      console.log('array true');
       this.setState({
         repos: receiveData,
         repo: null,

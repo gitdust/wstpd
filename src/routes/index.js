@@ -4,6 +4,7 @@ import Loadable from 'react-loadable';
 
 const Loading = ({ error }) => {
   if (error) {
+    console.log(error);
     return <div>Something wrong!</div>;
   }
   return <div>loading</div>;
