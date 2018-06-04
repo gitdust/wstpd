@@ -19,8 +19,10 @@
 
 欢迎提交 [issues](https://github.com/gitdust/wstpd/issues)，格式如下：
 
-- `Title`为安装之后的包名
-- `comment`为包作用的描述
+- issue 标题为安装之后的包名
+- issue 内容格式：
+  - fullName：owner/name，如"facebook/react"
+  - describe：作用描述
 
 > 默认描述全部采用官方repo的描述
 
