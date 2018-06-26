@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const utils = require('./utils');
 
@@ -21,21 +21,20 @@ const minifyConfig = {
   removeRedundantAttributes: true,
 };
 
-const PublicPath = utils.DEV ? '/' : '//packagejson.oss-cn-qingdao.aliyuncs.com/';
+const PublicPath = utils.DEBUG ? '/' : '//packagejson.oss-cn-qingdao.aliyuncs.com/';
 
 module.exports = {
-  // 入口文件
+  mode: utils.DEBUG ? 'development' : 'production',
   entry: {
     app: path.resolve('src', 'main.js'),
   },
-  // 出口文件
   output: {
     path: path.resolve('dist'),
     publicPath: PublicPath,
     filename: 'statics/js/[name].[hash:5].js',
     chunkFilename: 'statics/js/[name].[hash:5].js',
+    globalObject: 'this',
   },
-  // 处理对应模块
   module: {
     rules: [
       {
@@ -61,17 +60,13 @@ module.exports = {
       },
     ],
   }, 
-  // 插件
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('public', 'index.html'),
-      // 会在打包好的bundle.js后面加上hash串
-      cache: true,
+      cache: true, // 会在打包好的bundle.js后面加上hash串
       hash: true,
       minify: utils.DEV ? false : minifyConfig,
     }),
-    // 公共 js 和其引用的文件的映射关系文件，名称固定
-    new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
     utils.DefinePlugin(),
     utils.HappyJSPlugin(),
     ...utils.DLLReferencePlugin(),
@@ -79,6 +74,11 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve('src'),
+    },
+  },
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest',
     },
   },
 };

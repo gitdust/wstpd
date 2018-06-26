@@ -1,12 +1,11 @@
-// 是否开发环境
-const DEV = process.env.NODE_ENV === 'development'; 
-// 是否生产环境
-const PRO = process.env.NODE_ENV === 'production'; 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const DEBUG = NODE_ENV === 'development';
 
 const os = require('os');
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
 const HappyPack = require('happypack');
 
 // cpu 个数
@@ -59,20 +58,20 @@ const VENDORS = {
   ],
 };
 
-const DLLPath = DEV
+const DLLPath = DEBUG
   ? path.resolve('public', 'statics', 'dll')
   : path.resolve('public', 'statics', 'js');
-
 const DLLPlugin = () => new webpack.DllPlugin({
   path: path.join(DLLPath, '[name].manifest.json'), // manifest.json 输出路径
   name: '[name]_library',
 });
-
 const VendorKeys = Object.keys(VENDORS);
 const DLLReferencePlugin = () => VendorKeys.map((vendorKey) => {
   const manifestFile = path.join(DLLPath, `${vendorKey}.manifest.json`);
   return new webpack.DllReferencePlugin({ manifest: manifestFile });
 });
+
+const ScopeHoistingPlugin = () => new ModuleConcatenationPlugin();
 
 // css-loader.query
 // const CssLoaderQuery = {
@@ -83,13 +82,13 @@ const DLLReferencePlugin = () => VendorKeys.map((vendorKey) => {
 // };
 
 module.exports = {
-  DEV,
-  PRO,
+  DEBUG,
   VENDORS,
   DefinePlugin,
   // CssLoaderQuery,
   UglifyJsPlugin,
   HappyJSPlugin,
+  ScopeHoistingPlugin,
   DLLPath,
   DLLPlugin,
   DLLReferencePlugin,

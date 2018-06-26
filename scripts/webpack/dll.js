@@ -1,38 +1,33 @@
 const path = require('path');
 const fs = require('fs-extra');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const merge = require('webpack-merge');
 const utils = require('./utils');
 
-if (utils.PRO) { 
-  fs.emptyDir(path.resolve('public', 'statics', 'js'));
-} else {
-  fs.emptyDir(path.resolve('public', 'statics', 'dll'));
-}
-
-/** 默认 dev 配置 */
+// 默认 dev 配置
 let dllConfig = {
   entry: utils.VENDORS,
   output: {
     path: utils.DLLPath,
-    // TODO: [name].[hash].js 使用
-    filename: '[name].js',
-    // 暴露的全局对象名，与 webpack.DllPlugin.name 保持一致
-    library: '[name]_library',
+    filename: '[name].js', // TODO: [name].[hash].js 使用
+    library: '[name]_library', // 暴露的全局对象名，与 webpack.DllPlugin.name 保持一致
   },
   plugins: [
     utils.DefinePlugin(),
     utils.DLLPlugin(),
-    // scope hoisting
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    utils.ScopeHoistingPlugin(), // scope hoisting
   ],
 };
 
-if (utils.PRO) {
+if (utils.DEBUG) {
+  fs.emptyDirSync(path.resolve('public', 'statics', 'dll'));
   dllConfig = merge(dllConfig, {
-    // output: {
-    //   publicPath: 'http://host:port/build', // cdn
-    // },
+    mode: 'development',
+  });
+} else {
+  fs.emptyDirSync(path.resolve('public', 'statics', 'js'));
+  dllConfig = merge(dllConfig, {
+    mode: 'production',
     plugins: [
       utils.UglifyJsPlugin(),
     ],
