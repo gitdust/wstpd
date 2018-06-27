@@ -5,6 +5,8 @@ import { Card, Button, Tag, Icon, Spin } from 'antd';
 import BaseLink from '@/components/BaseLink';
 import { Thousandth } from '@/utils/tools';
 
+import style from '../Home.less';
+
 const Title = ({ repo }) => {
   if (repo.homepage) {
     return (
@@ -24,23 +26,24 @@ const Extra = ({ repo }) => [
 ];
 
 class Repo extends Component {
-  static defaultProps = {
-    repo: null,
-  }
   static propTypes = {
     repo: PropTypes.object,
+  }
+  static defaultProps = {
+    repo: null,
   }
   render() {
     const { repo } = this.props;
     return (
-      <Card
-        // hoverable
-        loading={!repo}
-        title={<Title repo={repo} />}
-        extra={<Extra repo={repo} />}
-      >
-        <div>{ repo.describe }</div>
-        <div>
+      <div className={style.repo}>
+        <div className={style.title}>
+          <Title repo={repo} />
+          <Extra repo={repo} />
+        </div>
+        <div className={style.content}>
+          { repo.describe }
+        </div>
+        <div className={style.tags}>
           {/* TODO: Tag 抽象 */}
           { repo.isBrowser && <Tag color="blue">浏览器</Tag> }
           { repo.isNodejs && <Tag color="green">Node</Tag> }
@@ -49,7 +52,18 @@ class Repo extends Component {
           { repo.isArchived && <Tag color="geekblue">归档</Tag> }
           { repo.isStabilized && <Tag color="lime">稳定</Tag> }
         </div>
-      </Card>
+      </div>
+      // <Card
+      //   // hoverable
+      //   loading={!repo}
+      //   title={<Title repo={repo} />}
+      //   extra={<Extra repo={repo} />}
+      // >
+      //   <div>{ repo.describe }</div>
+      //   <div>
+
+      //   </div>
+      // </Card>
     );
   }
 }

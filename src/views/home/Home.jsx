@@ -4,9 +4,11 @@ import { Button } from 'antd';
 import WebWorker from '@/utils/my.worker';
 import { error } from '@/utils/feedback';
 import { isArray } from '@/utils/tools';
-import BaseSearch from '@/components/BaseSearch';
+import BaseSearch from '@/components/BaseSearch/BaseSearch';
 import * as api from '../api';
 import Repo from './components/Repo';
+
+import style from './Home.less';
 
 const MyWorker = new WebWorker();
 MyWorker.addEventListener('error', (evt) => {
@@ -95,13 +97,13 @@ class Main extends Component {
   }
   render() {
     return [
-      <section key="search" className="search">
+      <section key="search" className={style.search}>
         <BaseSearch
           onSelect={this.onSelect}
           onSearch={this.onSearch}
         />
       </section>,
-      <section key="result" className="result">
+      <section key="result" className={style.result}>
         { this.showRepos() }
       </section>,
     ];

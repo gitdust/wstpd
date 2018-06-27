@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Form, Button, Row, Col, Checkbox } from 'antd';
-import BaseSearch from '@/components/BaseSearch';
+import BaseSearch from '@/components/BaseSearch/BaseSearch';
 import * as api from '../api';
 
 const FormItem = Form.Item;

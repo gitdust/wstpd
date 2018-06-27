@@ -4,7 +4,10 @@ export const isArray = (obj) => Object.prototype.toString.call(obj) === '[object
 
 export const hasOwnProperty = (obj, property) => Object.prototype.hasOwnProperty.call(obj, property);
 
-export const PopImg = name => <img className="pop-img" src={`/statics/img/${name}.jpg`} alt={`${name} qrcode`} />;
+export const PopImg = (name) => {
+  const image = require(`Images/${name}.jpg`);
+  return <img className="pop-img" src={image} alt={`${name} qrcode`} />;
+}
 
 // 千分位
 // TODO: 数据类型判断不完整

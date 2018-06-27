@@ -2,8 +2,7 @@ const base = require('./base');
 // const webpack = require('webpack');
 const WebpackMerge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const WebpackMd5Hash = require('webpack-md5-hash');
 // const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 // new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' })
@@ -19,7 +18,10 @@ module.exports = WebpackMerge(base, {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: utils.CssLoaderQuery,
+          },          
           'postcss-loader',
           {
             loader: 'less-loader',
@@ -52,6 +54,12 @@ module.exports = WebpackMerge(base, {
     // new ExtractTextPlugin('statics/css/[name].[contenthash:5].css'),
     // scope hoisting
     utils.ScopeHoistingPlugin(),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true,
+    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

@@ -29,6 +29,7 @@
     "jsx-a11y/anchor-is-valid": "off",
     "react/prefer-stateless-function": "off",
     "no-console": "warn",
-    "import/prefer-default-export": "warn"
+    "import/prefer-default-export": "warn",
+    "import/no-dynamic-require": 0
   }
 }

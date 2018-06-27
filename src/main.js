@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'nprogress/nprogress.css';
+import './styles/app.less';
 
 import './utils/error';
-
-import './styles/global.less';
 
 import App from './App';
 

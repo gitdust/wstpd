@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { Button, Popover } from 'antd';
 import BaseLink from '@/components/BaseLink';
-import { PopImg } from '@/utils/tools';
+import Images from '@/components/Images';
+
+import style from './Frame.less';
 
 class Header extends Component {
   render() {
     return (
-      <header>
+      <header className={style.header}>
         <a href="/">
-          <img alt="logo" className="logo" src="/statics/img/logo.png" /> 
+          <Images.Logo />
         </a>
         <span>
-          <Popover placement="bottom" content={PopImg('weibo')} trigger="click">
+          <Popover placement="bottom" content={<Images.Weibo />} trigger="click">
             <Button icon="weibo" size="small" />
           </Popover>
-          <Popover placement="bottom" content={PopImg('wechat')} trigger="click">
+          <Popover placement="bottom" content={<Images.Wechat />} trigger="click">
             <Button icon="wechat" size="small" />
           </Popover>
           <BaseLink url="https://github.com/gitdust/wstpd">

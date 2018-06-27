@@ -72,8 +72,10 @@ module.exports = {
     ...utils.DLLReferencePlugin(),
   ],
   resolve: {
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@': path.resolve('src'),
+      'Images': path.resolve('public', 'statics', 'img'),
     },
   },
   optimization: {

@@ -7,13 +7,13 @@ import * as helper from './helper';
 const Option = AutoComplete.Option;
 
 class BaseSearch extends Component {
-  static defaultProps = {
-    onSearch: () => {},
-    onSelect: () => {},
-  }
   static propTypes = {
     onSearch: PropTypes.func,
     onSelect: PropTypes.func,
+  }
+  static defaultProps = {
+    onSearch: () => {},
+    onSelect: () => {},
   }
   constructor(props) {
     super(props);

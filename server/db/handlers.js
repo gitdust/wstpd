@@ -85,5 +85,6 @@ exports.getRepoInfor = async (payload, res) => {
     res.json({ data: payload });
   } catch (error) {
     log(error);
+    res.json({ ok: false });
   }
 }

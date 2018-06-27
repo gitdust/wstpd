@@ -55,6 +55,7 @@ const VENDORS = {
     'react-router-dom',
     'axios', 
     'nprogress',
+    'react-helmet',
   ],
 };
 
@@ -74,18 +75,18 @@ const DLLReferencePlugin = () => VendorKeys.map((vendorKey) => {
 const ScopeHoistingPlugin = () => new ModuleConcatenationPlugin();
 
 // css-loader.query
-// const CssLoaderQuery = {
-//   sourceMap: true,
-//   modules: true,
-//   importLoaders: 2,
-//   localIdentName: '[name]-[local]-[hash:base64:5]',
-// };
+const CssLoaderQuery = {
+  sourceMap: true,
+  modules: true,
+  importLoaders: 2,
+  localIdentName: '[local]___[hash:base64:5]',
+};
 
 module.exports = {
   DEBUG,
   VENDORS,
   DefinePlugin,
-  // CssLoaderQuery,
+  CssLoaderQuery,
   UglifyJsPlugin,
   HappyJSPlugin,
   ScopeHoistingPlugin,

@@ -12,21 +12,21 @@ const Loading = ({ error }) => {
 }
 
 const Home = Loadable({
-  loader: () => import(/* webpackChunkName: 'home' */ '@/views/home'),
+  loader: () => import(/* webpackChunkName: 'home' */ '@/views/home/Home'),
   loading: Loading,
 });
 
 const Admin = Loadable({
-  loader: () => import(/* webpackChunkName: 'admin' */ '@/views/admin'),
+  loader: () => import(/* webpackChunkName: 'admin' */ '@/views/admin/Admin'),
   loading: Loading,
 });
 
 const NotFound = Loadable({
-  loader: () => import(/* webpackChunkName: '404' */ '@/layouts/NotFound'),
+  loader: () => import(/* webpackChunkName: '404' */ '@/views/frame/NotFound'),
   loading: Loading,
 });
 
-const routes = () => (
+const Routes = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
@@ -36,4 +36,4 @@ const routes = () => (
   </Router>
 );
 
-export default routes;
+export default Routes;
