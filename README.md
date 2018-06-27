@@ -7,7 +7,7 @@
 
 ### 关于
 
-我喜欢折腾前端构建，从头开始那种，可以掌握工程构建的每个细节，那么每一个`package`我都要去弄明白它的作用，但是自己总容易忘，伴随着各种`package`的不断升级，使用方法也在变化。
+我喜欢折腾前端构建，从头开始那种，可以掌握工程构建的每个细节，那么每一个`package` 我都要去弄明白它的作用，但是自己总容易忘，伴随着各种`package`的不断升级，使用方法也在变化。
 
 所以我整了这个网站，帮大家速查`package`作用。
 
@@ -28,15 +28,16 @@
 
 ### TODO
 
-- SSR
-- webpack 4
-- PWA
-- web worker
+- SSR ❌
+- webpack 4 ✅
+- PWA ❌
+- web worker ✅
 - ...
 
-## 本地开发
+### 本地开发
 
 ```bash
+$ yarn && cd server/ && yarn
 $ npm run web
 $ npm run server
 ```
