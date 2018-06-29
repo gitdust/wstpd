@@ -5,7 +5,7 @@ const logo = require('Images/logo.png');
 const weibo = require('Images/weibo.jpg');
 const wechat = require('Images/wechat.jpg');
 
-const Logo = () => <img alt="logo" className="logo" src={logo} /> 
+const Logo = () => <img alt="logo" className="logo" src={logo} />
 const Weibo = () => <img className="pop-img" src={weibo} alt={`${name} qrcode`} />
 const Wechat = () => <img className="pop-img" src={wechat} alt={`${name} qrcode`} />
 
